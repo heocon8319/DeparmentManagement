@@ -14,9 +14,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import com.vitech.studentmanagement.factory.CustomTextField;
+import com.vitech.studentmanagement.table.SinhVienTable;
 import com.vitech.studentmanagement.utility.Constant;
 
 public class StudentView implements ActionListener {
@@ -92,6 +94,8 @@ public class StudentView implements ActionListener {
 		/**
 		 * create table at center;
 		 */
+		SinhVienTable svTable = new SinhVienTable();
+		JScrollPane scrollPane = new JScrollPane(svTable.getTable());
 		
 		/**
 		 * create paging at bottom;
@@ -104,6 +108,7 @@ public class StudentView implements ActionListener {
 		pBottom.add(getBtnLast());
 		
 		this.getjPanel().add(pTop, BorderLayout.NORTH);
+		this.getjPanel().add(scrollPane, BorderLayout.CENTER);
 		this.getjPanel().add(pBottom, BorderLayout.SOUTH);
 		return this.getjPanel();
 	}

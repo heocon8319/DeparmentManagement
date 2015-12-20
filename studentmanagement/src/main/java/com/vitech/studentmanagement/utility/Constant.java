@@ -13,6 +13,7 @@ public class Constant {
 	public static String BOOK_ICON = "/app/book_icon.png";
 	public static String SAVE_ICON = "/app/btn_save_icon.png";
 	public static String REFRESH_ICON = "/app/btn_refresh_icon.png";
+	public static String DELETE_ICON = "/app/btn_delete_icon.png";
 	
 	public static String EMPLOYEE_VIEW = "EMPLOYEE_VIEW";
 	public static String REGISTER_SUBJECT_VIEW = "REGISTER_SUBJECT_VIEW";

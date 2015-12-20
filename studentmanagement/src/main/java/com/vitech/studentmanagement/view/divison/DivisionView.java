@@ -14,9 +14,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import com.vitech.studentmanagement.factory.CustomTextField;
+import com.vitech.studentmanagement.table.DivisionTable;
+import com.vitech.studentmanagement.table.SinhVienTable;
 import com.vitech.studentmanagement.utility.Constant;
 
 public class DivisionView implements ActionListener{
@@ -92,6 +95,8 @@ public class DivisionView implements ActionListener{
 		/**
 		 * create table at center;
 		 */
+		DivisionTable divisionTable = new DivisionTable();
+		JScrollPane scrollPane = new JScrollPane(divisionTable.getTable());
 		
 		/**
 		 * create paging at bottom;
@@ -104,6 +109,7 @@ public class DivisionView implements ActionListener{
 		pBottom.add(getBtnLast());
 		
 		this.getjPanel().add(pTop, BorderLayout.NORTH);
+		this.getjPanel().add(scrollPane, BorderLayout.CENTER);
 		this.getjPanel().add(pBottom, BorderLayout.SOUTH);
 		return this.getjPanel();
 	}

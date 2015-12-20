@@ -15,7 +15,7 @@ import com.vitech.studentmanagement.factory.IconRenderer;
 import com.vitech.studentmanagement.factory.TableMouseListener;
 import com.vitech.studentmanagement.utility.Constant;
 
-public class SinhVienTable implements ActionListener {
+public class ScheduleTable implements ActionListener {
 
 	private JTable table;
 
@@ -25,7 +25,7 @@ public class SinhVienTable implements ActionListener {
 	private JMenuItem miEdit;
 	private JMenuItem miDeleteAll;
 
-	public SinhVienTable(){
+	public ScheduleTable(){
 		createMiDelete();
 		createMiDeleteAll();
 		createMiEdit();

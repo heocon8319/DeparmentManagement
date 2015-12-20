@@ -14,9 +14,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import com.vitech.studentmanagement.factory.CustomTextField;
+import com.vitech.studentmanagement.table.ScheduleTable;
+import com.vitech.studentmanagement.table.ScoreTable;
 import com.vitech.studentmanagement.utility.Constant;
 
 public class ScoreView implements ActionListener{
@@ -92,6 +95,8 @@ public class ScoreView implements ActionListener{
 		/**
 		 * create table at center;
 		 */
+		ScoreTable scoreTable = new ScoreTable();
+		JScrollPane scrollPane = new JScrollPane(scoreTable.getTable());
 		
 		/**
 		 * create paging at bottom;
@@ -104,6 +109,7 @@ public class ScoreView implements ActionListener{
 		pBottom.add(getBtnLast());
 		
 		this.getjPanel().add(pTop, BorderLayout.NORTH);
+		this.getjPanel().add(scrollPane, BorderLayout.CENTER);
 		this.getjPanel().add(pBottom, BorderLayout.SOUTH);
 		return this.getjPanel();
 	}
