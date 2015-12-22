@@ -20,8 +20,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-import com.vitech.studentmanagement.model.Employee;
-import com.vitech.studentmanagement.table.BookTable;
+import com.vitech.studentmanagement.model.Role;
 import com.vitech.studentmanagement.utility.Constant;
 import com.vitech.studentmanagement.utility.Utilities;
 import com.vitech.studentmanagement.view.divison.DivisionView;
@@ -65,14 +64,12 @@ public class DashboardView extends ParentUI implements ActionListener {
 	private JMenuItem miEnglish;
 	private JMenuItem miVietnames;
 	private JMenuItem miSupport;
-
-	private BookTable bookTable;
 	
-	private Employee employee;
+	private Role employee;
 	
 	private JPanel Viewlist;
 
-	public DashboardView(Employee employee) {
+	public DashboardView(Role employee) {
 		this.employee = employee;
 		initialize();
 	}
@@ -98,7 +95,6 @@ public class DashboardView extends ParentUI implements ActionListener {
 		createMfile();
 		createmConfiguration();
 		createmDocument();		
-		createBookTable();
 		createLbEmployeeCode();
 		createLbEmployeeName();
 		createAvatar();
@@ -422,14 +418,6 @@ public class DashboardView extends ParentUI implements ActionListener {
 		miExit.setMnemonic(KeyEvent.VK_L);
 	}
 
-	public BookTable getBookTable() {
-		return bookTable;
-	}
-
-	public void createBookTable() {
-		this.bookTable = new BookTable();
-	}
-
 	public JLabel getLbEmployeeName() {
 		return lbEmployeeName;
 	}
@@ -455,7 +443,7 @@ public class DashboardView extends ParentUI implements ActionListener {
 		this.avatar = new JLabel(icon);
 	}
 
-	public Employee getEmployee() {
+	public Role getEmployee() {
 		return employee;
 	}
 

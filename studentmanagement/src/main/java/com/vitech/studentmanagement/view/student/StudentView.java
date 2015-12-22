@@ -18,7 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import com.vitech.studentmanagement.factory.CustomTextField;
-import com.vitech.studentmanagement.table.SinhVienTable;
+import com.vitech.studentmanagement.table.StudentTable;
 import com.vitech.studentmanagement.utility.Constant;
 
 public class StudentView implements ActionListener {
@@ -94,7 +94,7 @@ public class StudentView implements ActionListener {
 		/**
 		 * create table at center;
 		 */
-		SinhVienTable svTable = new SinhVienTable();
+		StudentTable svTable = new StudentTable();
 		JScrollPane scrollPane = new JScrollPane(svTable.getTable());
 		
 		/**

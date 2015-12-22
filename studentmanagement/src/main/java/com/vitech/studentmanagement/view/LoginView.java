@@ -14,11 +14,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import oracle.jdbc.Const;
-
-import com.vitech.studentmanagement.model.Employee;
-import com.vitech.studentmanagement.service.UserService;
-import com.vitech.studentmanagement.service.Impl.UserServiceImpl;
+import com.vitech.studentmanagement.model.Role;
+import com.vitech.studentmanagement.service.RoleService;
+import com.vitech.studentmanagement.service.Impl.RoleServiceImpl;
 import com.vitech.studentmanagement.utility.Constant;
 import com.vitech.studentmanagement.utility.Utilities;
 
@@ -38,7 +36,7 @@ public class LoginView extends ParentUI implements ActionListener {
 	private JButton btnLogin;
 	private JButton btnCancel;
 
-	private UserService userService = new UserServiceImpl();
+	private RoleService roleService = new RoleServiceImpl();
 
 	public LoginView() {
 		initialize();
@@ -117,10 +115,10 @@ public class LoginView extends ParentUI implements ActionListener {
 		userName = userName.replaceAll("\\s+","");
 		//set lower for text;
 		userName = userName.toLowerCase();
-		Employee employee = userService.find(userName, password);
-		if (employee.getId() != 0) {
+		Constant.ROLE = roleService.find(userName, password);
+		if (Constant.ROLE.getId() != 0) {
 			emptyFields();
-			DashboardView dashboardView = new DashboardView(employee);
+			DashboardView dashboardView = new DashboardView(Constant.ROLE);
 			dashboardView.show();
 			closeWindow(getFrame());
 		} else {

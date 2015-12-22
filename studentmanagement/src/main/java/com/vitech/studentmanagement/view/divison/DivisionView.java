@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 
 import com.vitech.studentmanagement.factory.CustomTextField;
 import com.vitech.studentmanagement.table.DivisionTable;
-import com.vitech.studentmanagement.table.SinhVienTable;
+import com.vitech.studentmanagement.table.StudentTable;
 import com.vitech.studentmanagement.utility.Constant;
 
 public class DivisionView implements ActionListener{

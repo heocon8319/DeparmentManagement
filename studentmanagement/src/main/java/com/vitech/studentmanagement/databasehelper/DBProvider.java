@@ -3,7 +3,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import com.vitech.studentmanagement.model.Employee;
+import com.vitech.studentmanagement.model.Role;
 import com.vitech.studentmanagement.utility.Utilities;
 public class DBProvider {
 	
@@ -18,7 +18,7 @@ public class DBProvider {
 		return connection;
 	}
 	
-	public static Connection connectOracelDB(Employee employee){
+	public static Connection connectOracelDB(Role employee){
 		Connection connection = null;
 		try {
 			Class.forName(Utilities.OJDBC_DRIVER);
