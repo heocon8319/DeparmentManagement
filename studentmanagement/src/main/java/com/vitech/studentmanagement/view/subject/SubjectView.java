@@ -4,10 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -17,8 +17,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-import com.vitech.studentmanagement.factory.CustomTextField;
-import com.vitech.studentmanagement.table.SpecialityTable;
+import com.vitech.studentmanagement.model.Subject;
+import com.vitech.studentmanagement.service.SubjectService;
+import com.vitech.studentmanagement.service.Impl.SubjectServiceImpl;
 import com.vitech.studentmanagement.table.SubjectTable;
 import com.vitech.studentmanagement.utility.Constant;
 
@@ -26,11 +27,11 @@ public class SubjectView implements ActionListener{
 
 	private JPanel jPanel;
 
-	private CustomTextField txtSearch;
-	private JComboBox<String> cbFilter;
+	private JComboBox<String> cbSemester;
+	private JComboBox<String> cbYear;
 
 	private JButton btnRefresh;
-	private JButton btnAdd;
+	private JButton btnSearch;
 	private JButton btnFirst;
 	private JButton btnLast;
 	private JButton btnPrivous;
@@ -38,25 +39,40 @@ public class SubjectView implements ActionListener{
 
 	private JTextField txtPage;
 
+	private SubjectService subjectService = new SubjectServiceImpl();
+	
+	private SubjectTable subjectTable;
+	
 	public SubjectView() {
 		initialize();
 	}
 
 	private void initialize() {
 		createjPanel();
-		createBtnAdd();
+		createBtnSearch();
 		createBtnFirst();
 		createBtnLast();
 		createBtnNext();
 		createBtnPrivous();
 		createBtnRefresh();
-		createCbFilter();
-		createTxtPage();
-		createTxtSearch();
+		createCbSemester();
+		createCbYear();
+		createTxtPage();		
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if(e.getSource() == getBtnSearch()){
+			String strSemester = (String) getCbSemester().getSelectedItem();
+			String strYear = (String) getCbYear().getSelectedItem();
+			int semester = Integer.parseInt(strSemester);
+			int year = Integer.parseInt(strYear);
+			List<Subject> subjects = subjectService.find(Constant.ROLE, year, semester);
+			subjectTable.createTableModel(subjects);
+		}
+		if(e.getSource() == getBtnRefresh()){
+			List<Subject> subjects = subjectService.find(Constant.ROLE, 2015, 2);
+			subjectTable.createTableModel(subjects);
+		}
 
 	}
 
@@ -64,38 +80,33 @@ public class SubjectView implements ActionListener{
 		/**
 		 * create component on top;
 		 */
-		JPanel pTop = new JPanel(new GridLayout(1, 2));
-
-		JPanel pLeft = new JPanel(new GridBagLayout());
+		JPanel pTop = new JPanel(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.insets = new Insets(10, 10, 10, 10);
 
-		gbc.weightx = 1;
+		gbc.weightx = 0;
 		gbc.gridy = 0;
 		gbc.gridx = 0;
-		pLeft.add(getTxtSearch(), gbc);
+		pTop.add(getCbYear(), gbc);
 
 		gbc.gridy = 0;
 		gbc.gridx = 1;
-		gbc.weightx = 0;
-		pLeft.add(getCbFilter(), gbc);
+		pTop.add(getCbSemester(), gbc);
 
 		gbc.gridy = 0;
 		gbc.gridx = 2;
-		pLeft.add(getBtnRefresh());
+		pTop.add(getBtnSearch(), gbc);
 
-		JPanel pRight = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		pRight.add(getBtnAdd());
-
-		pTop.add(pLeft);
-		pTop.add(pRight);
+		gbc.gridy = 0;
+		gbc.gridx = 3;
+		pTop.add(getBtnRefresh(), gbc);
 
 		/**
 		 * create table at center;
 		 */
-		SubjectTable subjectTable = new SubjectTable();
+		subjectTable = new SubjectTable();
 		JScrollPane scrollPane = new JScrollPane(subjectTable.getTable());
 
 		/**
@@ -124,24 +135,15 @@ public class SubjectView implements ActionListener{
 				.createTitledBorder("Subject management"));
 	}
 
-	public CustomTextField getTxtSearch() {
-		return txtSearch;
+	public JComboBox<String> getCbSemester() {
+		return cbSemester;
 	}
 
-	public void createTxtSearch() {
-		this.txtSearch = new CustomTextField(10);
-		this.txtSearch.setPlaceholder("Search");
-	}
-
-	public JComboBox<String> getCbFilter() {
-		return cbFilter;
-	}
-
-	public void createCbFilter() {
-		this.cbFilter = new JComboBox<String>();
-		this.cbFilter.addItem("MSSV");
-		this.cbFilter.addItem("Name");
-		this.cbFilter.addItem("Phone");
+	public void createCbSemester() {
+		this.cbSemester = new JComboBox<String>();
+		this.cbSemester.addItem("---Semester---");
+		this.cbSemester.addItem("1");
+		this.cbSemester.addItem("2");
 	}
 
 	public JButton getBtnRefresh() {
@@ -155,15 +157,15 @@ public class SubjectView implements ActionListener{
 		this.btnRefresh.addActionListener(this);
 	}
 
-	public JButton getBtnAdd() {
-		return btnAdd;
+	public JButton getBtnSearch() {
+		return btnSearch;
 	}
 
-	public void createBtnAdd() {
+	public void createBtnSearch() {
 		ImageIcon icon = new ImageIcon(getClass()
-				.getResource(Constant.ADD_ICON));
-		this.btnAdd = new JButton("Add", icon);
-		this.btnAdd.addActionListener(this);
+				.getResource(Constant.SEARCH_ICON));
+		this.btnSearch = new JButton("Search", icon);
+		this.btnSearch.addActionListener(this);
 	}
 
 	public JButton getBtnFirst() {
@@ -208,5 +210,21 @@ public class SubjectView implements ActionListener{
 
 	public void createTxtPage() {
 		this.txtPage = new JTextField("1/5");
+	}
+
+	public JComboBox<String> getCbYear() {
+		return cbYear;
+	}
+
+	public void createCbYear() {
+		this.cbYear = new JComboBox<String>();
+		this.cbYear.addItem("---Year---");
+		this.cbYear.addItem("2010");
+		this.cbYear.addItem("2011");
+		this.cbYear.addItem("2012");
+		this.cbYear.addItem("2013");
+		this.cbYear.addItem("2014");
+		this.cbYear.addItem("2015");
+		this.cbYear.addItem("2016");
 	}
 }

@@ -1,0 +1,45 @@
+package com.vitech.studentmanagement.dao.impl;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.vitech.studentmanagement.dao.SubjectDao;
+import com.vitech.studentmanagement.databasehelper.DBProvider;
+import com.vitech.studentmanagement.model.Role;
+import com.vitech.studentmanagement.model.Subject;
+
+public class SubjectDaoImpl implements SubjectDao {
+
+	public List<Subject> find(Role role, int year, int semester) {
+		List<Subject> subjects = new ArrayList<Subject>();
+		String sql = "select MH.MA_MH, MH.TEN_MH, MH.SO_TIN_CHI, HKN.NAM_HOC, HKN.HOC_KY "
+				+ "from dbasv.MON_HOC MH, dbasv.MONHOC_MO MHM, dbasv.HOCKY_NAM HKN "
+				+ "where MH.MA_MH = MHM.MA_MH  and MHM.MA_HK = HKN.MA_HK and HKN.HOC_KY = ? and HKN.NAM_HOC = ?";
+		try {
+			Connection connection = DBProvider.connectOracelDB(role);
+			PreparedStatement preparedStatement = connection
+					.prepareStatement(sql);
+			preparedStatement.setInt(1, semester);
+			preparedStatement.setInt(2, year);
+			ResultSet rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				Subject subject = new Subject();
+				subject.setMaMH(rs.getString("MA_MH"));
+				subject.setTenMH(rs.getString("TEN_MH"));
+				subject.setSoTinChi(rs.getInt("SO_TIN_CHI"));
+				subject.setNam(rs.getInt("NAM_HOC"));
+				subject.setHocKy(rs.getInt("HOC_KY"));
+				subjects.add(subject);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return subjects;
+	}
+
+}

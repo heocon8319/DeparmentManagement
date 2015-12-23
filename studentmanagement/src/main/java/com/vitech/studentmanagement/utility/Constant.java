@@ -16,6 +16,7 @@ public class Constant {
 	public static final String SAVE_ICON = "/app/btn_save_icon.png";
 	public static final String REFRESH_ICON = "/app/btn_refresh_icon.png";
 	public static final String DELETE_ICON = "/app/btn_delete_icon.png";
+	public static final String SEARCH_ICON = "/app/btn-search-icon.png";
 	
 	public static final String EMPLOYEE_VIEW = "EMPLOYEE_VIEW";
 	public static final String REGISTER_SUBJECT_VIEW = "REGISTER_SUBJECT_VIEW";
