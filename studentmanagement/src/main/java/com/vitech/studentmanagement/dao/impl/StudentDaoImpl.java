@@ -88,4 +88,26 @@ public class StudentDaoImpl implements StudentDao {
 		return result;
 	}
 
+	public boolean seftUpdate(Role role, Student student) {
+		boolean result = false;
+		String sql = "update dbasv.SINH_VIEN set TEN_SV = '"+student.getTenSv()+"', "
+				+ "GIOI_TINH = '"+student.getGioiTinh()+"', "
+				+ "DIA_CHI_LL = '"+student.getDiaChi()+"', "
+				+ "SDT = '"+student.getSoDienThoai()+"', "
+				+ "NGAY_SINH = to_date('"+student.getNgaySinh()+"', 'yyyy-MM-dd') ";
+		try {
+			Connection connection = DBProvider.connectOracelDB(role);
+			PreparedStatement preparedStatement = connection
+					.prepareStatement(sql);
+			int rs = preparedStatement.executeUpdate();
+			if (rs > 0) {
+				result = true;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 }

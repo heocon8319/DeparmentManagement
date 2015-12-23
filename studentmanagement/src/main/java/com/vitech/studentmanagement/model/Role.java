@@ -8,6 +8,19 @@ public class Role {
 	private String image;
 	private String code;
 	private String name;
+	
+	public int checkRole(){
+		/*
+		 * SV = 1;
+		 * DBASV = 2;
+		 */
+		int roleType = 1;
+		if(this.userName.indexOf("dbasv") >= 0 || this.userName.indexOf("DBASV") >= 0){
+			roleType = 2;
+		}
+		System.out.println("roleType: "+roleType);
+		return roleType;
+	}
 
 	public String getUserName() {
 		return userName;

@@ -176,16 +176,6 @@ public class DashboardView extends ParentUI implements ActionListener {
         
         CardLayout cardLayout = (CardLayout) getViewlist().getLayout();
         cardLayout.show(getViewlist(), Constant.SCHEDULE_VIEW);
-        
-		//JPanel pBookTable = getBookTable().createUI();
-		//getFrame().add(pBookTable, BorderLayout.CENTER);
-		
-//		NhiemVuService nvService = new NhiemVuServiceImp();
-//		List<NhiemVu> nhiemVus = nvService.find(employee);
-//		for(NhiemVu nv : nhiemVus){
-//			System.out.println("Ma: "+nv.getMaNhiemVu());
-//			System.out.println("Ten: "+nv.getTenNhiemVu());
-//		}
 	}
 
 	private void createMenuBar() {
@@ -232,6 +222,14 @@ public class DashboardView extends ParentUI implements ActionListener {
 		if(e.getSource() == getBtnRegisterSubjectManagement()){
 			 CardLayout cardLayout = (CardLayout) getViewlist().getLayout();
 		     cardLayout.show(getViewlist(), Constant.REGISTER_SUBJECT_VIEW);
+		}
+		if(e.getSource() == getMiLogout()){
+			this.frame.dispose();
+			LoginView loginView = new LoginView();
+			loginView.show();
+		}
+		if(e.getSource() == getMiExit()){
+			System.exit(0);
 		}
 	}
 
@@ -375,7 +373,8 @@ public class DashboardView extends ParentUI implements ActionListener {
 	public void createMiExit() {
 		ImageIcon icon = new ImageIcon(getClass().getResource(Constant.CLOSE_ICON));
 		this.miExit = new JMenuItem("Exit", icon);
-		miExit.setMnemonic(KeyEvent.VK_E);
+		this.miExit.setMnemonic(KeyEvent.VK_E);
+		this.miExit.addActionListener(this);
 	}
 
 	public JMenuItem getMiEnglish() {
@@ -415,7 +414,8 @@ public class DashboardView extends ParentUI implements ActionListener {
 	public void createMiLogout(){
 		ImageIcon icon = new ImageIcon(getClass().getResource(Constant.EXIST_ICON));
 		this.miLogout = new JMenuItem("Logout", icon);
-		miExit.setMnemonic(KeyEvent.VK_L);
+		this.miLogout.setMnemonic(KeyEvent.VK_L);
+		this.miLogout.addActionListener(this);
 	}
 
 	public JLabel getLbEmployeeName() {

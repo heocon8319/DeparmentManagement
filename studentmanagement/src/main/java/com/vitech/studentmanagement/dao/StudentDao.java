@@ -12,4 +12,6 @@ public interface StudentDao {
 	public Student findById(Role role, String maSv);
 	
 	public boolean update(Role role,  Student student);
+	
+	public boolean seftUpdate(Role role, Student student);
 }

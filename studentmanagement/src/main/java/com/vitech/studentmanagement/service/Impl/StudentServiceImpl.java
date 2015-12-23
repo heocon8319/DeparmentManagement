@@ -21,6 +21,12 @@ public class StudentServiceImpl implements StudentService{
 	}
 
 	public boolean update(Role role, Student student) {
-		return studentDao.update(role, student);
+		boolean result = false;
+		if(role.checkRole() == 2){
+			result = studentDao.update(role, student);
+		}else{
+			result = studentDao.seftUpdate(role, student);
+		}
+		return result;
 	}
 }
