@@ -12,4 +12,6 @@ public interface StudentService {
 	public Student findById(Role role, String maSv);
 	
 	public boolean update(Role role, Student student);
+	
+	public boolean add(Role role, Student student);
 }

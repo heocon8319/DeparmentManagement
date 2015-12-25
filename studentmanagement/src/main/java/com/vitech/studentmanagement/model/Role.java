@@ -18,7 +18,6 @@ public class Role {
 		if(this.userName.indexOf("dbasv") >= 0 || this.userName.indexOf("DBASV") >= 0){
 			roleType = 2;
 		}
-		System.out.println("roleType: "+roleType);
 		return roleType;
 	}
 

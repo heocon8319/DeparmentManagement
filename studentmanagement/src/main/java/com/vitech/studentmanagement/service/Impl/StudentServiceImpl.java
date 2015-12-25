@@ -29,4 +29,8 @@ public class StudentServiceImpl implements StudentService{
 		}
 		return result;
 	}
+
+	public boolean add(Role role, Student student) {
+		return studentDao.add(role, student);
+	}
 }

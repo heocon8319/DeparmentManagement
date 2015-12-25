@@ -37,6 +37,8 @@ public class StudentView implements ActionListener {
 
 	private JTextField txtPage;
 
+	public StudentTable svTable;
+	
 	public StudentView() {
 		initialize();
 	}
@@ -55,7 +57,10 @@ public class StudentView implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if(e.getSource() == getBtnAdd()){
+			AddStudentView addStudentView = new AddStudentView(svTable);
+			addStudentView.show();
+		}
 
 	}
 
@@ -94,7 +99,7 @@ public class StudentView implements ActionListener {
 		/**
 		 * create table at center;
 		 */
-		StudentTable svTable = new StudentTable();
+		svTable = new StudentTable();
 		JScrollPane scrollPane = new JScrollPane(svTable.getTable());
 		
 		/**

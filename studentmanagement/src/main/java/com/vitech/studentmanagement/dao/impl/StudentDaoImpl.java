@@ -110,4 +110,28 @@ public class StudentDaoImpl implements StudentDao {
 		return result;
 	}
 
+	public boolean add(Role role, Student student) {
+		boolean result = false;
+		String sql = "insert into dbasv.SINH_VIEN(MA_SV, TEN_SV, NGAY_SINH, GIOI_TINH, DIA_CHI_LL, SDT, MA_NGANH) values("
+				+ "'"+student.getMaSv()+"', "
+				+ "'"+student.getTenSv()+"', "
+				+ "to_date( '"+student.getNgaySinh()+"','yyyy-MM-dd'),"
+				+ "'"+student.getGioiTinh()+"', "
+				+ "'"+student.getDiaChi()+"', "
+				+ "'"+student.getSoDienThoai()+"', "
+				+ "'"+student.getMaNganh()+"' )"; 
+		try {
+			Connection connection = DBProvider.connectOracelDB(role);
+			PreparedStatement preparedStatement = connection
+					.prepareStatement(sql);
+			int rs = preparedStatement.executeUpdate();
+			if (rs > 0) {
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 }

@@ -14,4 +14,6 @@ public interface StudentDao {
 	public boolean update(Role role,  Student student);
 	
 	public boolean seftUpdate(Role role, Student student);
+	
+	public boolean add(Role role, Student student);
 }
