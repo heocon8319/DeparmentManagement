@@ -16,4 +16,8 @@ public class TeacherServiceImpl implements TeacherService{
 		return teacherDao.findAll(role);
 	}
 
+	public boolean seftUpdate(Role role, Teacher teacher) {
+		return teacherDao.seftUpdate(role, teacher);
+	}
+
 }

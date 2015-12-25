@@ -18,7 +18,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import com.vitech.studentmanagement.factory.CustomTextField;
-import com.vitech.studentmanagement.table.SubjectTable;
 import com.vitech.studentmanagement.table.TeacherTable;
 import com.vitech.studentmanagement.utility.Constant;
 
@@ -42,7 +41,7 @@ public class TeacherView implements ActionListener {
 		initialize();
 	}
 
-	private void initialize() {
+	private void initialize() {		
 		createjPanel();
 		createBtnAdd();
 		createBtnFirst();

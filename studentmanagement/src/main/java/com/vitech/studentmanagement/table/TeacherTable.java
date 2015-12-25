@@ -14,6 +14,7 @@ import com.vitech.studentmanagement.model.Teacher;
 import com.vitech.studentmanagement.service.TeacherService;
 import com.vitech.studentmanagement.service.Impl.TeacherServiceImpl;
 import com.vitech.studentmanagement.utility.Constant;
+import com.vitech.studentmanagement.view.teacher.EditTeacherView;
 
 public class TeacherTable implements ActionListener {
 
@@ -26,7 +27,7 @@ public class TeacherTable implements ActionListener {
 	private JMenuItem miDeleteAll;
 	
 	private DefaultTableModel tableModel;
-	private TeacherService teacherService = new TeacherServiceImpl();
+	public TeacherService teacherService = new TeacherServiceImpl();
 
 	public TeacherTable(){
 		createMiDelete();
@@ -84,7 +85,10 @@ public class TeacherTable implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if(e.getSource() == getMiEdit()){
+			EditTeacherView editView = new EditTeacherView(this);
+			editView.show();
+		}
 
 	}
 

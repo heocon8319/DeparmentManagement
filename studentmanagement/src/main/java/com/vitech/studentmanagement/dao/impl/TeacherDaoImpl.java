@@ -43,4 +43,26 @@ public class TeacherDaoImpl implements TeacherDao{
 		return teachers;
 	}
 
+	public boolean seftUpdate(Role role, Teacher teacher) {
+		boolean result = false;
+		String sql = "update dbasv.NHAN_VIEN set TEN_NV = '"+teacher.getTenNv()+"', "
+				+ "GIOI_TINH = '"+teacher.getGioiTinh()+"', "
+				+ "DIA_CHI_LL = '"+teacher.getDiaChi()+"', "
+				+ "SDT = '"+teacher.getSoDienThoai()+"', "
+				+ "NAM_SINH = to_date('"+teacher.getNamSinh()+"', 'yyyy-MM-dd') ";
+		try {
+			Connection connection = DBProvider.connectOracelDB(role);
+			PreparedStatement preparedStatement = connection
+					.prepareStatement(sql);
+			int rs = preparedStatement.executeUpdate();
+			if (rs > 0) {
+				result = true;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 }

@@ -8,4 +8,6 @@ import com.vitech.studentmanagement.model.Teacher;
 public interface TeacherDao {
 
 	public List<Teacher> findAll(Role role);
+	
+	public boolean seftUpdate(Role role, Teacher teacher);
 }

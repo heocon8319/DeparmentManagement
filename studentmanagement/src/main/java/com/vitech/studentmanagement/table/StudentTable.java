@@ -112,7 +112,6 @@ public class StudentTable implements ActionListener {
 	public void createMiDelete() {
 		this.miDelete = new JMenuItem("Delete");
 		this.miDelete.addActionListener(this);
-		//this.miDelete.setEnabled(false);
 	}
 
 	public JMenuItem getMiEdit() {
