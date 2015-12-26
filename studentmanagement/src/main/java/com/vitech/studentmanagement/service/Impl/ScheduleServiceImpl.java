@@ -1,0 +1,18 @@
+package com.vitech.studentmanagement.service.Impl;
+
+import java.util.List;
+
+import com.vitech.studentmanagement.dao.ScheduleDao;
+import com.vitech.studentmanagement.dao.impl.ScheduleDaoImpl;
+import com.vitech.studentmanagement.model.Role;
+import com.vitech.studentmanagement.model.Schedule;
+import com.vitech.studentmanagement.service.ScheduleService;
+
+public class ScheduleServiceImpl implements ScheduleService{
+
+	private ScheduleDao scheduleDao = new ScheduleDaoImpl();
+	public List<Schedule> findAll(Role role) {
+		return scheduleDao.findAll(role);
+	}
+
+}

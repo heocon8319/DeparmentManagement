@@ -65,7 +65,8 @@ public class EditEmployeeView implements ActionListener {
 	private RoleService roleService = new RoleServiceImpl();
 
 	private String maNv;
-
+	private int rlEdit;
+	
 	public void show() {
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -175,7 +176,7 @@ public class EditEmployeeView implements ActionListener {
 	}
 	
 	private void checkRoleForEditing(){
-		int rlEdit = Constant.ROLE.checkRole();
+		rlEdit = Constant.ROLE.checkRole();
 		if(rlEdit != 4){
 			getLbSalary().setVisible(false);
 			getTxtSalary().setVisible(false);
@@ -258,12 +259,16 @@ public class EditEmployeeView implements ActionListener {
 			emp.setAddress(strAddress);
 			emp.setPhone(strPhone);
 			emp.setSex(strSex);
-			emp.setSalary(Integer.parseInt(salary));
-			emp.setBonus(Integer.parseInt(bonus));
 			emp.setHomeTown(homeTown);
-			emp.setManagerCode(manager.getCode());
-			emp.setRoleCode(rl.getCode());
 			emp.setDob(strDob);
+			
+			if(rlEdit == 4){
+				emp.setSalary(Integer.parseInt(salary));
+				emp.setBonus(Integer.parseInt(bonus));
+				emp.setManagerCode(manager.getCode());
+				emp.setRoleCode(rl.getCode());
+			}
+			
 
 			boolean rs = employeeService.update(Constant.ROLE, emp);
 			if (rs) {
