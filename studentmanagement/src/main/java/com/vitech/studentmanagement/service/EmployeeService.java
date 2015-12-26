@@ -8,4 +8,6 @@ import com.vitech.studentmanagement.model.Role;
 public interface EmployeeService {
 
 	public List<Employee> findAll(Role role);
+
+	public boolean add(Role role, Employee employee);
 }

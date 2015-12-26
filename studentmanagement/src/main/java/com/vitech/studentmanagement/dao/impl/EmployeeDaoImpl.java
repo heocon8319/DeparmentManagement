@@ -44,4 +44,43 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		return employees;
 	}
 
+	public boolean add(Role role, Employee employee) {
+		boolean result = false;
+		String sql = "insert into dbasv.NHAN_VIEN(MA_NV, TEN_NV, NAM_SINH, GIOI_TINH, DIA_CHI_LL, SDT, LUONG, PHU_CAP, QUE_QUAN, MA_NQL, MA_NHIEM_VU)values('"
+				+ employee.getCode()
+				+ "', '"
+				+ employee.getName()
+				+ "', to_date( '"
+				+ employee.getDob()
+				+ "','yyyy-MM-dd'),'"
+				+ employee.getSex()
+				+ "', '"
+				+ employee.getAddress()
+				+ "', '"
+				+ employee.getPhone()
+				+ "', "
+				+ employee.getSalary()
+				+ ", "
+				+ employee.getBonus()
+				+ ", '"
+				+ employee.getHomeTown()
+				+ "', '"
+				+ employee.getManagerCode()
+				+ "', '"
+				+ employee.getRoleCode()
+				+ "' )";
+		try {
+			Connection connection = DBProvider.connectOracelDB(role);
+			PreparedStatement preparedStatement = connection
+					.prepareStatement(sql);
+			int rs = preparedStatement.executeUpdate();
+			if (rs > 0) {
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 }

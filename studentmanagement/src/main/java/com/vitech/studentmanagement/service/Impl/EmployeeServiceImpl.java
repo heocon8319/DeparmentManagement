@@ -15,4 +15,8 @@ public class EmployeeServiceImpl implements EmployeeService{
 	public List<Employee> findAll(Role role) {
 		return employeeDao.findAll(role);
 	}
+
+	public boolean add(Role role, Employee employee) {
+		return employeeDao.add(role, employee);
+	}
 }

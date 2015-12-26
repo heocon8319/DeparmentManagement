@@ -18,7 +18,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import com.vitech.studentmanagement.factory.CustomTextField;
-import com.vitech.studentmanagement.table.DivisionTable;
 import com.vitech.studentmanagement.table.EmployeeTable;
 import com.vitech.studentmanagement.utility.Constant;
 
@@ -37,7 +36,7 @@ public class EmployeeView implements ActionListener{
 	private JButton btnNext;
 
 	private JTextField txtPage;
-
+	public EmployeeTable employeeTable;
 	public EmployeeView() {
 		initialize();
 	}
@@ -56,8 +55,10 @@ public class EmployeeView implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
+		if(e.getSource() == getBtnAdd()){
+			AddEmployeeView addView = new AddEmployeeView(employeeTable);
+			addView.show();
+		}
 	}
 
 	public JPanel createUI() {
@@ -95,7 +96,7 @@ public class EmployeeView implements ActionListener{
 		/**
 		 * create table at center;
 		 */
-		EmployeeTable employeeTable = new EmployeeTable();
+		employeeTable = new EmployeeTable();
 		JScrollPane scrollPane = new JScrollPane(employeeTable.getTable());
 		
 		/**
