@@ -22,12 +22,12 @@ public class EmployeeTesting {
 		em.setHomeTown("HCM");
 		em.setManagerCode("NV04");
 		em.setName("Ma Vinh Trinh");
-		em.setPhone("0909888777");
+		em.setPhone("0909999777");
 		em.setRoleCode("GVi");
 		em.setSalary(1500);
 		em.setSex("Nam");
 		
-		boolean rs = employeeDao.add(role, em);
+		boolean rs = employeeDao.update(role, em);
 		System.out.println(rs);
 		
 //		List<Employee> employees = employeeDao.findAll(role);

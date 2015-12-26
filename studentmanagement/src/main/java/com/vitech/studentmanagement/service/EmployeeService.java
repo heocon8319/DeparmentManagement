@@ -10,4 +10,8 @@ public interface EmployeeService {
 	public List<Employee> findAll(Role role);
 
 	public boolean add(Role role, Employee employee);
+	
+	public Employee find(Role role, String maNV);
+	
+	public boolean update(Role role, Employee employee);
 }

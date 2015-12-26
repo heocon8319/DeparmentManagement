@@ -14,6 +14,7 @@ import com.vitech.studentmanagement.model.Employee;
 import com.vitech.studentmanagement.service.EmployeeService;
 import com.vitech.studentmanagement.service.Impl.EmployeeServiceImpl;
 import com.vitech.studentmanagement.utility.Constant;
+import com.vitech.studentmanagement.view.employee.EditEmployeeView;
 
 public class EmployeeTable implements ActionListener {
 
@@ -92,7 +93,12 @@ public class EmployeeTable implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if(e.getSource() == getMiEdit()){
+			int row = this.table.getSelectedRow();
+			String maNv = (String) this.tableModel.getValueAt(row, 0);
+			EditEmployeeView editView = new EditEmployeeView(this, maNv);
+			editView.show();
+		}
 
 	}
 

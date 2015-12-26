@@ -19,4 +19,12 @@ public class EmployeeServiceImpl implements EmployeeService{
 	public boolean add(Role role, Employee employee) {
 		return employeeDao.add(role, employee);
 	}
+
+	public Employee find(Role role, String maNV) {
+		return employeeDao.find(role, maNV);
+	}
+
+	public boolean update(Role role, Employee employee) {
+		return employeeDao.update(role, employee);
+	}
 }

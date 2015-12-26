@@ -83,4 +83,58 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		return result;
 	}
 
+	public boolean update(Role role, Employee employee) {
+		boolean result = false;
+		String sql = "update dbasv.NHAN_VIEN set TEN_NV = '"
+				+ employee.getName() + "', NAM_SINH = to_date('"
+				+ employee.getDob() + "', 'yyyy-MM-dd') , GIOI_TINH='"
+				+ employee.getSex() + "', DIA_CHI_LL='" + employee.getAddress()
+				+ "', SDT='" + employee.getPhone() + "', LUONG="
+				+ employee.getSalary() + ", PHU_CAP=" + employee.getBonus()
+				+ ", QUE_QUAN='" + employee.getHomeTown() + "', MA_NQL='"
+				+ employee.getManagerCode() + "', MA_NHIEM_VU='"
+				+ employee.getRoleCode() + "' where MA_NV = '"
+				+ employee.getCode() + "'";
+		try {
+			Connection connection = DBProvider.connectOracelDB(role);
+			PreparedStatement preparedStatement = connection
+					.prepareStatement(sql);
+			int rs = preparedStatement.executeUpdate();
+			if (rs > 0) {
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public Employee find(Role role, String maNV) {
+		Employee employee = new Employee();
+		String sql = "select * from dbasv.NHAN_VIEN where MA_NV = ?";
+		try {
+			Connection connection = DBProvider.connectOracelDB(role);
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, maNV);
+			ResultSet rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				employee.setAddress(rs.getString("DIA_CHI_LL"));
+				employee.setBonus(rs.getInt("PHU_CAP"));
+				employee.setCode(rs.getString("MA_NV"));
+				employee.setDob(rs.getString("NAM_SINH"));
+				employee.setHomeTown(rs.getString("QUE_QUAN"));
+				employee.setManagerCode(rs.getString("MA_NQL"));
+				employee.setName(rs.getString("TEN_NV"));
+				employee.setPhone(rs.getString("SDT"));
+				employee.setRoleCode(rs.getString("MA_NHIEM_VU"));
+				employee.setSalary(rs.getInt("LUONG"));
+				employee.setSex(rs.getString("GIOI_TINH"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return employee;
+	}
+
 }
