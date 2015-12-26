@@ -18,7 +18,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import com.vitech.studentmanagement.factory.CustomTextField;
-import com.vitech.studentmanagement.table.RegisterTable;
 import com.vitech.studentmanagement.table.ScheduleTable;
 import com.vitech.studentmanagement.utility.Constant;
 
@@ -37,6 +36,8 @@ public class ScheduleView implements ActionListener{
 	private JButton btnNext;
 
 	private JTextField txtPage;
+	
+	private ScheduleTable scheduleTable;
 
 	public ScheduleView() {
 		initialize();
@@ -56,7 +57,10 @@ public class ScheduleView implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if(e.getSource() == getBtnAdd()){
+			AddScheduleView addView = new AddScheduleView(scheduleTable);
+			addView.show();
+		}
 
 	}
 
@@ -95,7 +99,7 @@ public class ScheduleView implements ActionListener{
 		/**
 		 * create table at center;
 		 */
-		ScheduleTable scheduleTable = new ScheduleTable();
+		scheduleTable = new ScheduleTable();
 		JScrollPane scrollPane = new JScrollPane(scheduleTable.getTable());
 		
 		/**

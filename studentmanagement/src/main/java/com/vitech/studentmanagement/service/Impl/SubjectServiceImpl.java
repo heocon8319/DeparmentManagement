@@ -16,4 +16,8 @@ public class SubjectServiceImpl implements SubjectService {
 		return subjectDao.find(role, year, semester);
 	}
 
+	public List<Subject> findAll(Role role) {
+		return subjectDao.findAll(role);
+	}
+
 }

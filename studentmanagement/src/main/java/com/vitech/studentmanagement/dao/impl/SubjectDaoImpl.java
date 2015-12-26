@@ -42,4 +42,26 @@ public class SubjectDaoImpl implements SubjectDao {
 		return subjects;
 	}
 
+	public List<Subject> findAll(Role role) {
+		List<Subject> subjects = new ArrayList<Subject>();
+		String sql = "select * from dbasv.MON_HOC";
+		try {
+			Connection connection = DBProvider.connectOracelDB(role);
+			PreparedStatement preparedStatement = connection
+					.prepareStatement(sql);
+			ResultSet rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				Subject subject = new Subject();
+				subject.setMaMH(rs.getString("MA_MH"));
+				subject.setTenMH(rs.getString("TEN_MH"));
+				subject.setSoTinChi(rs.getInt("SO_TIN_CHI"));
+				subjects.add(subject);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return subjects;
+	}
+
 }
