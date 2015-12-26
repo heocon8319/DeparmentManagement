@@ -4,6 +4,7 @@ public class Speciality {
 
 	private String maNganh;
 	private String tenNganh;
+	private String maNQL;
 
 	public String getMaNganh() {
 		return maNganh;
@@ -19,5 +20,13 @@ public class Speciality {
 
 	public void setTenNganh(String tenNganh) {
 		this.tenNganh = tenNganh;
+	}
+
+	public String getMaNQL() {
+		return maNQL;
+	}
+
+	public void setMaNQL(String maNQL) {
+		this.maNQL = maNQL;
 	}
 }

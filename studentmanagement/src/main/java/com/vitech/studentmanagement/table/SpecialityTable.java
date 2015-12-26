@@ -2,6 +2,7 @@ package com.vitech.studentmanagement.table;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
@@ -13,6 +14,9 @@ import javax.swing.table.DefaultTableModel;
 import com.vitech.studentmanagement.factory.ButtonEditor;
 import com.vitech.studentmanagement.factory.IconRenderer;
 import com.vitech.studentmanagement.factory.TableMouseListener;
+import com.vitech.studentmanagement.model.Speciality;
+import com.vitech.studentmanagement.service.SpecialityService;
+import com.vitech.studentmanagement.service.Impl.SpecialityServiceImpl;
 import com.vitech.studentmanagement.utility.Constant;
 
 public class SpecialityTable implements ActionListener {
@@ -24,7 +28,10 @@ public class SpecialityTable implements ActionListener {
 	private JMenuItem miDelete;
 	private JMenuItem miEdit;
 	private JMenuItem miDeleteAll;
-
+	
+	private DefaultTableModel tableModel;
+	public SpecialityService specialityService = new SpecialityServiceImpl();
+	
 	public SpecialityTable(){
 		createMiDelete();
 		createMiDeleteAll();
@@ -33,52 +40,31 @@ public class SpecialityTable implements ActionListener {
 		createTable();
 	}
 	
-	public void createTableModel(DefaultTableModel tableModel) {
+	public void createTableModel() {
 		tableModel.setRowCount(0);
-		for (int i = 1; i < 10; i++) {
-			String[] rowData = new String[9];
-			rowData[0] = String.valueOf(i);
-			rowData[1] = "SV00" + i;
-			rowData[2] = "Student "+i;
-			rowData[3] = "14/04/1990";
-			rowData[4] = "Nam";
-			rowData[5] = "So 1 Hai Ba Trung";
-			rowData[6] = "0987654321";
-			rowData[7] = "Computer Science";
-			rowData[8] = "Delete";
+		List<Speciality> specialities = specialityService.findAll(Constant.ROLE);
+		for (Speciality sp: specialities) {
+			String[] rowData = new String[3];
+			rowData[0] = sp.getMaNganh();
+			rowData[1] = sp.getTenNganh();
+			rowData[2] = sp.getMaNQL();
 			tableModel.addRow(rowData);
 		}
 	}
 
 	public void createTable() {
-		ImageIcon iconDelete = new ImageIcon(getClass().getResource(Constant.DELETE_ICON));
-		DefaultTableModel tableModel = new DefaultTableModel();
-		tableModel.addColumn("No");
+		tableModel = new DefaultTableModel();
 		tableModel.addColumn("Code");
 		tableModel.addColumn("Name");
-		tableModel.addColumn("DOB");
-		tableModel.addColumn("Sex");
-		tableModel.addColumn("Address");
-		tableModel.addColumn("Phone");
-		tableModel.addColumn("Spciality");
-		tableModel.addColumn("Delete");
+		tableModel.addColumn("Manager");
 
-		createTableModel(tableModel);
+		createTableModel();
 
 		this.table = new JTable(tableModel);
 		this.table.setRowHeight(30);
-		this.table.getColumn("Delete").setCellRenderer(new IconRenderer(iconDelete));
-		this.table.getColumn("Delete").setCellEditor(new ButtonEditor(new JCheckBox()));
 
-		this.table.getColumnModel().getColumn(0).setPreferredWidth(10);
-		this.table.getColumnModel().getColumn(1).setPreferredWidth(30);
-		this.table.getColumnModel().getColumn(2).setPreferredWidth(30);
-		this.table.getColumnModel().getColumn(3).setPreferredWidth(30);
-		this.table.getColumnModel().getColumn(4).setPreferredWidth(30);
-		this.table.getColumnModel().getColumn(5).setPreferredWidth(200);
-		this.table.getColumnModel().getColumn(6).setPreferredWidth(30);
-		this.table.getColumnModel().getColumn(7).setPreferredWidth(150);
-		this.table.getColumnModel().getColumn(8).setPreferredWidth(10);
+		this.table.getColumnModel().getColumn(0).setPreferredWidth(100);
+		this.table.getColumnModel().getColumn(1).setPreferredWidth(100);
 		this.table.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
 
 		this.table.setComponentPopupMenu(getPopupMenu());

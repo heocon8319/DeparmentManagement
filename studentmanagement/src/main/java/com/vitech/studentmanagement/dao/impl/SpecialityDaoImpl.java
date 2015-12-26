@@ -25,6 +25,7 @@ public class SpecialityDaoImpl implements SpecialityDao{
 				Speciality speciality = new Speciality();
 				speciality.setMaNganh(rs.getString("MA_NGANH"));
 				speciality.setTenNganh(rs.getString("TEN_NGANH"));
+				speciality.setMaNQL(rs.getString("TRUONG_BO_MON"));
 				specialities.add(speciality);
 			}
 		} catch (Exception e) {
