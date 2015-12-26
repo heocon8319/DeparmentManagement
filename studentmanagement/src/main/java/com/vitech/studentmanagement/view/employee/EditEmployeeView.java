@@ -51,6 +51,11 @@ public class EditEmployeeView implements ActionListener {
 	private JComboBox<String> cbbSex;
 
 	private JDatePickerImpl datePicker;
+	
+	private JLabel lbSalary;
+	private JLabel lbBonus;
+	private JLabel lbManager;
+	private JLabel lbRole;
 
 	private JButton btnSave;
 	private JButton btnCancel;
@@ -88,11 +93,11 @@ public class EditEmployeeView implements ActionListener {
 
 		gbc.gridy = 5;
 		gbc.gridx = 0;
-		frame.add(new JLabel("Salary"), gbc);
+		frame.add(getLbSalary(), gbc);
 
 		gbc.gridy = 6;
 		gbc.gridx = 0;
-		frame.add(new JLabel("Bonus"), gbc);
+		frame.add(getLbBonus(), gbc);
 
 		gbc.gridy = 7;
 		gbc.gridx = 0;
@@ -100,11 +105,11 @@ public class EditEmployeeView implements ActionListener {
 
 		gbc.gridy = 8;
 		gbc.gridx = 0;
-		frame.add(new JLabel("Manager"), gbc);
+		frame.add(getLbManager(), gbc);
 
 		gbc.gridy = 9;
 		gbc.gridx = 0;
-		frame.add(new JLabel("Role"), gbc);
+		frame.add(getLbRole(), gbc);
 
 		gbc.gridy = 10;
 		gbc.gridx = 0;
@@ -167,6 +172,25 @@ public class EditEmployeeView implements ActionListener {
 		gbc.gridx = 2;
 		frame.add(getBtnCancel(), gbc);
 
+	}
+	
+	private void checkRoleForEditing(){
+		int rlEdit = Constant.ROLE.checkRole();
+		if(rlEdit != 4){
+			getLbSalary().setVisible(false);
+			getTxtSalary().setVisible(false);
+			
+			getLbBonus().setVisible(false);
+			getTxtBonus().setVisible(false);
+			
+			getLbManager().setVisible(false);
+			getCbbManager().setVisible(false);
+			
+			getLbRole().setVisible(false);
+			getCbbRole().setVisible(false);
+			
+			this.frame.setSize(350, 400);
+		}
 	}
 
 	private void findById() {
@@ -259,6 +283,7 @@ public class EditEmployeeView implements ActionListener {
 		initialize();
 		this.employeeTable = employeeTable;
 		this.maNv = maNv;
+		checkRoleForEditing();
 		findById();
 	}
 
@@ -281,6 +306,10 @@ public class EditEmployeeView implements ActionListener {
 		createTxtHomeTown();
 		createCbbManager();
 		createCbbRole();
+		createLbSalary();
+		createLbBonus();
+		createLbManager();
+		createLbRole();
 	}
 
 	public JFrame getFrame() {
@@ -446,5 +475,37 @@ public class EditEmployeeView implements ActionListener {
 			}
 		});
 		this.cbbRole.addActionListener(this);
+	}
+
+	public JLabel getLbSalary() {
+		return lbSalary;
+	}
+
+	public void createLbSalary() {
+		this.lbSalary = new JLabel("Salary");
+	}
+
+	public JLabel getLbBonus() {
+		return lbBonus;
+	}
+
+	public void createLbBonus() {
+		this.lbBonus = new JLabel("Bonus");
+	}
+
+	public JLabel getLbManager() {
+		return lbManager;
+	}
+
+	public void createLbManager() {
+		this.lbManager = new JLabel("Manager");
+	}
+
+	public JLabel getLbRole() {
+		return lbRole;
+	}
+
+	public void createLbRole() {
+		this.lbRole = new JLabel("Role");
 	}
 }

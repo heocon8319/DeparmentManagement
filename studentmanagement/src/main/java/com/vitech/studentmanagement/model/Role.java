@@ -13,10 +13,18 @@ public class Role {
 		/*
 		 * SV = 1;
 		 * DBASV = 2;
+		 * NV_TPK = 3;
+		 * NV_QLNS = 4;
 		 */
 		int roleType = 1;
 		if(this.userName.indexOf("dbasv") >= 0 || this.userName.indexOf("DBASV") >= 0){
 			roleType = 2;
+		}
+		if(this.userName.indexOf("nv01") >= 0 || this.userName.indexOf("NV01") >= 0){
+			roleType = 3;
+		}
+		if(this.userName.indexOf("nv02") >= 0 || this.userName.indexOf("NV02") >= 0){
+			roleType = 4;
 		}
 		return roleType;
 	}
