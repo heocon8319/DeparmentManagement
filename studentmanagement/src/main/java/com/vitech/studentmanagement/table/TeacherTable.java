@@ -40,7 +40,8 @@ public class TeacherTable implements ActionListener {
 	public void createTableModel() {
 		String roleType = Constant.ROLE.checkRole();
 		if (!roleType.equals(Constant.QLNS) 
-				&& !roleType.equals(Constant.GVU)) {
+				&& !roleType.equals(Constant.GVU)
+				&& !roleType.equals(Constant.SV)) {
 			tableModel.setRowCount(0);
 			List<Teacher> teachers = teacherService.findAll(Constant.ROLE);
 			for (Teacher teacher : teachers) {

@@ -38,22 +38,24 @@ public class EmployeeTable implements ActionListener {
 	}
 
 	public void createTableModel() {
-		tableModel.setRowCount(0);
-		List<Employee> employees = employeeService.findAll(Constant.ROLE);
-		for (Employee employee : employees) {
-			String[] rowData = new String[11];
-			rowData[0] = employee.getCode();
-			rowData[1] = employee.getName();
-			rowData[2] = employee.getDob();
-			rowData[3] = employee.getSex();
-			rowData[4] = employee.getAddress();
-			rowData[5] = employee.getPhone();
-			rowData[6] = String.valueOf(employee.getSalary());
-			rowData[7] = String.valueOf(employee.getBonus());
-			rowData[8] = employee.getHomeTown();
-			rowData[9] = employee.getManagerCode();
-			rowData[10] = employee.getRoleCode();
-			tableModel.addRow(rowData);
+		if (!Constant.ROLE.checkRole().equals(Constant.SV)) {
+			tableModel.setRowCount(0);
+			List<Employee> employees = employeeService.findAll(Constant.ROLE);
+			for (Employee employee : employees) {
+				String[] rowData = new String[11];
+				rowData[0] = employee.getCode();
+				rowData[1] = employee.getName();
+				rowData[2] = employee.getDob();
+				rowData[3] = employee.getSex();
+				rowData[4] = employee.getAddress();
+				rowData[5] = employee.getPhone();
+				rowData[6] = String.valueOf(employee.getSalary());
+				rowData[7] = String.valueOf(employee.getBonus());
+				rowData[8] = employee.getHomeTown();
+				rowData[9] = employee.getManagerCode();
+				rowData[10] = employee.getRoleCode();
+				tableModel.addRow(rowData);
+			}
 		}
 	}
 

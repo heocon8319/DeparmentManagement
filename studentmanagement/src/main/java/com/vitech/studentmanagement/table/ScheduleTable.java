@@ -39,7 +39,8 @@ public class ScheduleTable implements ActionListener {
 
 	public void createTableModel() {
 		String roleType = Constant.ROLE.checkRole();
-		if (!roleType.equals(Constant.QLNS)) {
+		if (!roleType.equals(Constant.QLNS) 
+				&& !roleType.equals(Constant.SV)) {
 			tableModel.setRowCount(0);
 			List<Schedule> schedules = scheduleService.findAll(Constant.ROLE);
 			for (Schedule sc : schedules) {
