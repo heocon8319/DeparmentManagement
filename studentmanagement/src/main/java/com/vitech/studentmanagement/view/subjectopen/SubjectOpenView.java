@@ -1,4 +1,4 @@
-package com.vitech.studentmanagement.view.score;
+package com.vitech.studentmanagement.view.subjectopen;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -18,11 +18,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import com.vitech.studentmanagement.factory.CustomTextField;
-import com.vitech.studentmanagement.table.ScheduleTable;
-import com.vitech.studentmanagement.table.ScoreTable;
+import com.vitech.studentmanagement.table.SubjectOpenTable;
 import com.vitech.studentmanagement.utility.Constant;
 
-public class ScoreView implements ActionListener{
+public class SubjectOpenView implements ActionListener{
 
 	private JPanel jPanel;
 
@@ -37,8 +36,10 @@ public class ScoreView implements ActionListener{
 	private JButton btnNext;
 
 	private JTextField txtPage;
+	
+	SubjectOpenTable subjectOpenTable;
 
-	public ScoreView() {
+	public SubjectOpenView() {
 		initialize();
 	}
 
@@ -56,8 +57,10 @@ public class ScoreView implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
+		if(e.getSource() == getBtnAdd()){
+			AddSubjectOpenView addView = new AddSubjectOpenView(subjectOpenTable);
+			addView.show();
+		}
 	}
 
 	public JPanel createUI() {
@@ -95,8 +98,8 @@ public class ScoreView implements ActionListener{
 		/**
 		 * create table at center;
 		 */
-		ScoreTable scoreTable = new ScoreTable();
-		JScrollPane scrollPane = new JScrollPane(scoreTable.getTable());
+		subjectOpenTable = new SubjectOpenTable();
+		JScrollPane scrollPane = new JScrollPane(subjectOpenTable.getTable());
 		
 		/**
 		 * create paging at bottom;

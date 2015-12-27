@@ -21,7 +21,7 @@ public class Constant {
 	public static final String EMPLOYEE_VIEW = "EMPLOYEE_VIEW";
 	public static final String REGISTER_SUBJECT_VIEW = "REGISTER_SUBJECT_VIEW";
 	public static final String SCHEDULE_VIEW = "SCHEDULE_VIEW";
-	public static final String SCORE_VIEW = "SCORE_VIEW";
+	public static final String SUBJECT_OPEN_VIEW = "SUBJECT_OPEN_VIEW";
 	public static final String SPECIALITY_VIEW = "SPECIALITY_VIEW";
 	public static final String STUDENT_VIEW = "STUDENT_VIEW";
 	public static final String SUBJECT_VIEW = "SUBJECT_VIEW";

@@ -11,6 +11,7 @@ import com.vitech.studentmanagement.dao.SubjectDao;
 import com.vitech.studentmanagement.databasehelper.DBProvider;
 import com.vitech.studentmanagement.model.Role;
 import com.vitech.studentmanagement.model.Subject;
+import com.vitech.studentmanagement.model.SubjectOpen;
 import com.vitech.studentmanagement.model.SubjectSpeciality;
 
 public class SubjectDaoImpl implements SubjectDao {
@@ -65,7 +66,7 @@ public class SubjectDaoImpl implements SubjectDao {
 		return subjects;
 	}
 
-	public List<SubjectSpeciality> getAll(Role role) {
+	public List<SubjectSpeciality> getSubjectSpeciality(Role role) {
 		List<SubjectSpeciality> subjectSpecialities = new ArrayList<SubjectSpeciality>();
 		String sql = "select * from dbasv.MONHOC_NGANH";
 		try {
@@ -105,6 +106,30 @@ public class SubjectDaoImpl implements SubjectDao {
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	public List<SubjectOpen> getSubjectOpen(Role role) {
+		List<SubjectOpen> subjectOpens = new ArrayList<SubjectOpen>();
+		String sql = "select * from dbasv.MONHOC_MO";
+		try {
+			Connection connection = DBProvider.connectOracelDB(role);
+			PreparedStatement preparedStatement = connection
+					.prepareStatement(sql);
+			ResultSet rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				SubjectOpen subject = new SubjectOpen();
+				subject.setMaMH(rs.getString("MA_MH"));
+				subject.setMaHK(rs.getString("MA_HK"));
+				subject.setNgayBD(rs.getString("NGAY_BD"));
+				subject.setNgayKT(rs.getString("NGAY_KT"));
+				subject.setSoLuongSV(rs.getInt("SO_LUONG_SV"));
+				subjectOpens.add(subject);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return subjectOpens;
 	}
 
 }

@@ -26,10 +26,10 @@ import com.vitech.studentmanagement.utility.Utilities;
 import com.vitech.studentmanagement.view.employee.EmployeeView;
 import com.vitech.studentmanagement.view.register.RegisterSubjectView;
 import com.vitech.studentmanagement.view.schedule.ScheduleView;
-import com.vitech.studentmanagement.view.score.ScoreView;
 import com.vitech.studentmanagement.view.speciality.SpecialityView;
 import com.vitech.studentmanagement.view.student.StudentView;
 import com.vitech.studentmanagement.view.subject.SubjectView;
+import com.vitech.studentmanagement.view.subjectopen.SubjectOpenView;
 import com.vitech.studentmanagement.view.subjectspciality.SubjectSpeciallyView;
 import com.vitech.studentmanagement.view.teacher.TeacherView;
 
@@ -43,7 +43,7 @@ public class DashboardView extends ParentUI implements ActionListener {
 	private JLabel lbEmployeeName;
 	private JLabel lbEmployeeCode;
 
-	private JButton btnScoreManagement;
+	private JButton btnSubjectOpen;
 	private JButton btnEmployeeManagement;
 	private JButton btnStudentManagement;
 	private JButton btnTeacherManagement;
@@ -77,7 +77,7 @@ public class DashboardView extends ParentUI implements ActionListener {
 	private void initialize() {
 		createFrame();
 		createLbTitle();
-		createBtnScoreManagement();
+		createBtnSubjectOpen();
 		createBtnSubjectManagement();
 		createBtnEmployeeManagement();
 		createBtnSpecialityManagement();
@@ -137,7 +137,7 @@ public class DashboardView extends ParentUI implements ActionListener {
 		pButtons.add(getBtnScheduleManagement());
 		pButtons.add(getBtnTeacherManagement());
 		pButtons.add(getBtnSubjectSpeciality());
-		pButtons.add(getBtnScoreManagement());
+		pButtons.add(getBtnSubjectOpen());
 		pButtons.add(getBtnRegisterSubjectManagement());
 
 		JPanel pLeft = new JPanel(new BorderLayout());
@@ -154,8 +154,8 @@ public class DashboardView extends ParentUI implements ActionListener {
         ScheduleView scheduleView = new ScheduleView();
         getViewlist().add(scheduleView.createUI(), Constant.SCHEDULE_VIEW);
         
-        ScoreView scoreView = new ScoreView();
-        getViewlist().add(scoreView.createUI(), Constant.SCORE_VIEW);
+        SubjectOpenView scoreView = new SubjectOpenView();
+        getViewlist().add(scoreView.createUI(), Constant.SUBJECT_OPEN_VIEW);
         
         SpecialityView specialityView = new SpecialityView();
         getViewlist().add(specialityView.createUI(), Constant.SPECIALITY_VIEW);
@@ -215,9 +215,9 @@ public class DashboardView extends ParentUI implements ActionListener {
 			 CardLayout cardLayout = (CardLayout) getViewlist().getLayout();
 		     cardLayout.show(getViewlist(), Constant.SUBJECT_SPECIALITY_VIEW);
 		}
-		if(e.getSource() == getBtnScoreManagement()){
+		if(e.getSource() == getBtnSubjectOpen()){
 			CardLayout cardLayout = (CardLayout) getViewlist().getLayout();
-		    cardLayout.show(getViewlist(), Constant.SCORE_VIEW);
+		    cardLayout.show(getViewlist(), Constant.SUBJECT_OPEN_VIEW);
 		}
 		if(e.getSource() == getBtnRegisterSubjectManagement()){
 			 CardLayout cardLayout = (CardLayout) getViewlist().getLayout();
@@ -254,13 +254,13 @@ public class DashboardView extends ParentUI implements ActionListener {
 		this.lbTitle = new JLabel("DEPARMENT MANAGEMENT");
 	}
 
-	public JButton getBtnScoreManagement() {
-		return btnScoreManagement;
+	public JButton getBtnSubjectOpen() {
+		return btnSubjectOpen;
 	}
 
-	public void createBtnScoreManagement() {
-		this.btnScoreManagement = new JButton("SCORE MANAGEMENT");
-		this.btnScoreManagement.addActionListener(this);
+	public void createBtnSubjectOpen() {
+		this.btnSubjectOpen = new JButton("SUBJECT OPEN");
+		this.btnSubjectOpen.addActionListener(this);
 	}
 
 	public JButton getBtnEmployeeManagement() {
