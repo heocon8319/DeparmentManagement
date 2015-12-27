@@ -87,4 +87,24 @@ public class SubjectDaoImpl implements SubjectDao {
 		return subjectSpecialities;
 	}
 
+	public boolean addSubjectSpeciality(Role role,
+			SubjectSpeciality subjectSpeciality) {
+		boolean result = false;
+		String sql = "insert into dbasv.MONHOC_NGANH(MA_MH, MA_NGANH, BAT_BUOC)values(?, ?, ?)";
+		try {
+			Connection connection = DBProvider.connectOracelDB(role);
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, subjectSpeciality.getMaMH());
+			preparedStatement.setString(2, subjectSpeciality.getMaNganh());
+			preparedStatement.setString(3, subjectSpeciality.getBatBuoc());
+			int rs = preparedStatement.executeUpdate();
+			if (rs > 0) {
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 }

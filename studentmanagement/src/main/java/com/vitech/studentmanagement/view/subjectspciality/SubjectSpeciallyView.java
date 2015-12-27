@@ -19,10 +19,9 @@ import javax.swing.JTextField;
 
 import com.vitech.studentmanagement.factory.CustomTextField;
 import com.vitech.studentmanagement.table.SubjectSpecialityTable;
-import com.vitech.studentmanagement.table.StudentTable;
 import com.vitech.studentmanagement.utility.Constant;
 
-public class SubjectSpeciallyView implements ActionListener{
+public class SubjectSpeciallyView implements ActionListener {
 
 	private JPanel jPanel;
 
@@ -37,6 +36,8 @@ public class SubjectSpeciallyView implements ActionListener{
 	private JButton btnNext;
 
 	private JTextField txtPage;
+
+	private SubjectSpecialityTable subjectSpecialityTable;
 
 	public SubjectSpeciallyView() {
 		initialize();
@@ -56,7 +57,11 @@ public class SubjectSpeciallyView implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if (e.getSource() == getBtnAdd()) {
+			AddSubjectSpecialityView addView = new AddSubjectSpecialityView(
+					subjectSpecialityTable);
+			addView.show();
+		}
 
 	}
 
@@ -64,40 +69,41 @@ public class SubjectSpeciallyView implements ActionListener{
 		/**
 		 * create component on top;
 		 */
-		JPanel pTop = new JPanel(new GridLayout(1,2));
+		JPanel pTop = new JPanel(new GridLayout(1, 2));
 
 		JPanel pLeft = new JPanel(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.insets = new Insets(10, 10, 10, 10);
-		
+
 		gbc.weightx = 1;
 		gbc.gridy = 0;
 		gbc.gridx = 0;
 		pLeft.add(getTxtSearch(), gbc);
-		
+
 		gbc.gridy = 0;
 		gbc.gridx = 1;
 		gbc.weightx = 0;
 		pLeft.add(getCbFilter(), gbc);
-		
+
 		gbc.gridy = 0;
-		gbc.gridx = 2;	
+		gbc.gridx = 2;
 		pLeft.add(getBtnRefresh());
-		
+
 		JPanel pRight = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		pRight.add(getBtnAdd());
-		
+
 		pTop.add(pLeft);
 		pTop.add(pRight);
-		
+
 		/**
 		 * create table at center;
 		 */
-		SubjectSpecialityTable divisionTable = new SubjectSpecialityTable();
-		JScrollPane scrollPane = new JScrollPane(divisionTable.getTable());
-		
+		subjectSpecialityTable = new SubjectSpecialityTable();
+		JScrollPane scrollPane = new JScrollPane(
+				subjectSpecialityTable.getTable());
+
 		/**
 		 * create paging at bottom;
 		 */
@@ -107,7 +113,7 @@ public class SubjectSpeciallyView implements ActionListener{
 		pBottom.add(getTxtPage());
 		pBottom.add(getBtnNext());
 		pBottom.add(getBtnLast());
-		
+
 		this.getjPanel().add(pTop, BorderLayout.NORTH);
 		this.getjPanel().add(scrollPane, BorderLayout.CENTER);
 		this.getjPanel().add(pBottom, BorderLayout.SOUTH);
@@ -120,7 +126,8 @@ public class SubjectSpeciallyView implements ActionListener{
 
 	public void createjPanel() {
 		this.jPanel = new JPanel(new BorderLayout());
-		this.jPanel.setBorder(BorderFactory.createTitledBorder("Subject Speciality"));
+		this.jPanel.setBorder(BorderFactory
+				.createTitledBorder("Subject Speciality"));
 	}
 
 	public CustomTextField getTxtSearch() {

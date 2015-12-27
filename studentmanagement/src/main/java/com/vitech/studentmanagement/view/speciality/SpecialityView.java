@@ -18,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import com.vitech.studentmanagement.factory.CustomTextField;
+import com.vitech.studentmanagement.model.Subject;
 import com.vitech.studentmanagement.table.SpecialityTable;
 import com.vitech.studentmanagement.utility.Constant;
 
@@ -36,6 +37,8 @@ public class SpecialityView implements ActionListener{
 	private JButton btnNext;
 
 	private JTextField txtPage;
+	
+	private SpecialityTable specialityTable;
 
 	public SpecialityView() {
 		initialize();
@@ -55,7 +58,9 @@ public class SpecialityView implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if(e.getSource() == getBtnAdd()){
+			
+		}
 
 	}
 
@@ -94,7 +99,7 @@ public class SpecialityView implements ActionListener{
 		/**
 		 * create table at center;
 		 */
-		SpecialityTable specialityTable = new SpecialityTable();
+		specialityTable = new SpecialityTable();
 		JScrollPane scrollPane = new JScrollPane(specialityTable.getTable());
 		
 		/**

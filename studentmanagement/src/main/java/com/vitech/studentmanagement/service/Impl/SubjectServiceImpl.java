@@ -25,4 +25,9 @@ public class SubjectServiceImpl implements SubjectService {
 		return subjectDao.getAll(role);
 	}
 
+	public boolean addSubjectSpeciality(Role role,
+			SubjectSpeciality subjectSpeciality) {
+		return subjectDao.addSubjectSpeciality(role, subjectSpeciality);
+	}
+
 }

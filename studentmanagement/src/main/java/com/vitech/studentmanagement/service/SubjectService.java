@@ -13,4 +13,6 @@ public interface SubjectService {
 	public List<Subject> findAll(Role role);
 	
 	public List<SubjectSpeciality> getAll(Role role);
+	
+	public boolean addSubjectSpeciality(Role role, SubjectSpeciality subjectSpeciality);
 }
