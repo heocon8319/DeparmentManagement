@@ -26,7 +26,7 @@ public class Constant {
 	public static final String STUDENT_VIEW = "STUDENT_VIEW";
 	public static final String SUBJECT_VIEW = "SUBJECT_VIEW";
 	public static final String TEACHER_VIEW = "TEACHER_VIEW";
-	public static final String DIVISION_VIEW = "DIVISION_VIEW";
+	public static final String SUBJECT_SPECIALITY_VIEW = "SUBJECT_SPECIALITY_VIEW";
 	
 	public static final String PATTERN_DATE = "yyyy-MM-dd";
 	

@@ -1,4 +1,4 @@
-package com.vitech.studentmanagement.view.divison;
+package com.vitech.studentmanagement.view.subjectspciality;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -18,11 +18,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import com.vitech.studentmanagement.factory.CustomTextField;
-import com.vitech.studentmanagement.table.DivisionTable;
+import com.vitech.studentmanagement.table.SubjectSpecialityTable;
 import com.vitech.studentmanagement.table.StudentTable;
 import com.vitech.studentmanagement.utility.Constant;
 
-public class DivisionView implements ActionListener{
+public class SubjectSpeciallyView implements ActionListener{
 
 	private JPanel jPanel;
 
@@ -38,7 +38,7 @@ public class DivisionView implements ActionListener{
 
 	private JTextField txtPage;
 
-	public DivisionView() {
+	public SubjectSpeciallyView() {
 		initialize();
 	}
 
@@ -95,7 +95,7 @@ public class DivisionView implements ActionListener{
 		/**
 		 * create table at center;
 		 */
-		DivisionTable divisionTable = new DivisionTable();
+		SubjectSpecialityTable divisionTable = new SubjectSpecialityTable();
 		JScrollPane scrollPane = new JScrollPane(divisionTable.getTable());
 		
 		/**
@@ -120,7 +120,7 @@ public class DivisionView implements ActionListener{
 
 	public void createjPanel() {
 		this.jPanel = new JPanel(new BorderLayout());
-		this.jPanel.setBorder(BorderFactory.createTitledBorder("Division management"));
+		this.jPanel.setBorder(BorderFactory.createTitledBorder("Subject Speciality"));
 	}
 
 	public CustomTextField getTxtSearch() {

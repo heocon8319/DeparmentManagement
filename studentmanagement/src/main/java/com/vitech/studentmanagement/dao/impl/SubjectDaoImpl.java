@@ -11,6 +11,7 @@ import com.vitech.studentmanagement.dao.SubjectDao;
 import com.vitech.studentmanagement.databasehelper.DBProvider;
 import com.vitech.studentmanagement.model.Role;
 import com.vitech.studentmanagement.model.Subject;
+import com.vitech.studentmanagement.model.SubjectSpeciality;
 
 public class SubjectDaoImpl implements SubjectDao {
 
@@ -62,6 +63,28 @@ public class SubjectDaoImpl implements SubjectDao {
 			e.printStackTrace();
 		}
 		return subjects;
+	}
+
+	public List<SubjectSpeciality> getAll(Role role) {
+		List<SubjectSpeciality> subjectSpecialities = new ArrayList<SubjectSpeciality>();
+		String sql = "select * from dbasv.MONHOC_NGANH";
+		try {
+			Connection connection = DBProvider.connectOracelDB(role);
+			PreparedStatement preparedStatement = connection
+					.prepareStatement(sql);
+			ResultSet rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				SubjectSpeciality subject = new SubjectSpeciality();
+				subject.setMaMH(rs.getString("MA_MH"));
+				subject.setMaNganh(rs.getString("MA_NGANH"));
+				subject.setBatBuoc(rs.getString("BAT_BUOC"));
+				subjectSpecialities.add(subject);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return subjectSpecialities;
 	}
 
 }

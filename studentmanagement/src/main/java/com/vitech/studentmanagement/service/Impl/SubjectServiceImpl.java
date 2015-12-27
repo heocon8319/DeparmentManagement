@@ -6,6 +6,7 @@ import com.vitech.studentmanagement.dao.SubjectDao;
 import com.vitech.studentmanagement.dao.impl.SubjectDaoImpl;
 import com.vitech.studentmanagement.model.Role;
 import com.vitech.studentmanagement.model.Subject;
+import com.vitech.studentmanagement.model.SubjectSpeciality;
 import com.vitech.studentmanagement.service.SubjectService;
 
 public class SubjectServiceImpl implements SubjectService {
@@ -18,6 +19,10 @@ public class SubjectServiceImpl implements SubjectService {
 
 	public List<Subject> findAll(Role role) {
 		return subjectDao.findAll(role);
+	}
+
+	public List<SubjectSpeciality> getAll(Role role) {
+		return subjectDao.getAll(role);
 	}
 
 }

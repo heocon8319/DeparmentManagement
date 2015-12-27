@@ -23,7 +23,6 @@ import javax.swing.JPanel;
 import com.vitech.studentmanagement.model.Role;
 import com.vitech.studentmanagement.utility.Constant;
 import com.vitech.studentmanagement.utility.Utilities;
-import com.vitech.studentmanagement.view.divison.DivisionView;
 import com.vitech.studentmanagement.view.employee.EmployeeView;
 import com.vitech.studentmanagement.view.register.RegisterSubjectView;
 import com.vitech.studentmanagement.view.schedule.ScheduleView;
@@ -31,6 +30,7 @@ import com.vitech.studentmanagement.view.score.ScoreView;
 import com.vitech.studentmanagement.view.speciality.SpecialityView;
 import com.vitech.studentmanagement.view.student.StudentView;
 import com.vitech.studentmanagement.view.subject.SubjectView;
+import com.vitech.studentmanagement.view.subjectspciality.SubjectSpeciallyView;
 import com.vitech.studentmanagement.view.teacher.TeacherView;
 
 @SuppressWarnings("serial")
@@ -49,7 +49,7 @@ public class DashboardView extends ParentUI implements ActionListener {
 	private JButton btnTeacherManagement;
 	private JButton btnSpecialityManagement;
 	private JButton btnScheduleManagement;
-	private JButton btnDivisionManagement;
+	private JButton btnSubjectSpeciality;
 	private JButton btnSubjectManagement;
 	private JButton btnRegisterSubjectManagement;
 	
@@ -84,7 +84,7 @@ public class DashboardView extends ParentUI implements ActionListener {
 		createBtnScheduleManagement();
 		createBtnTeacherManagement();
 		createBtnStudentManagement();
-		createBtnDivisionManagement();		
+		createBtnSubjectSpeciality();		
 		createBtnRegisterSubjectManagement();
 		createBarMenu();		
 		createMiExit();
@@ -136,7 +136,7 @@ public class DashboardView extends ParentUI implements ActionListener {
 		pButtons.add(getBtnStudentManagement());
 		pButtons.add(getBtnScheduleManagement());
 		pButtons.add(getBtnTeacherManagement());
-		pButtons.add(getBtnDivisionManagement());
+		pButtons.add(getBtnSubjectSpeciality());
 		pButtons.add(getBtnScoreManagement());
 		pButtons.add(getBtnRegisterSubjectManagement());
 
@@ -169,8 +169,8 @@ public class DashboardView extends ParentUI implements ActionListener {
         TeacherView teacherView = new TeacherView();
         getViewlist().add(teacherView.createUI(), Constant.TEACHER_VIEW);
         
-        DivisionView divisionView = new DivisionView();
-        getViewlist().add(divisionView.createUI(), Constant.DIVISION_VIEW);
+        SubjectSpeciallyView divisionView = new SubjectSpeciallyView();
+        getViewlist().add(divisionView.createUI(), Constant.SUBJECT_SPECIALITY_VIEW);
         
         getFrame().add(getViewlist(), BorderLayout.CENTER);
         
@@ -211,9 +211,9 @@ public class DashboardView extends ParentUI implements ActionListener {
 			CardLayout cardLayout = (CardLayout) getViewlist().getLayout();
 		    cardLayout.show(getViewlist(), Constant.TEACHER_VIEW);
 		}
-		if(e.getSource() == getBtnDivisionManagement()){
+		if(e.getSource() == getBtnSubjectSpeciality()){
 			 CardLayout cardLayout = (CardLayout) getViewlist().getLayout();
-		     cardLayout.show(getViewlist(), Constant.DIVISION_VIEW);
+		     cardLayout.show(getViewlist(), Constant.SUBJECT_SPECIALITY_VIEW);
 		}
 		if(e.getSource() == getBtnScoreManagement()){
 			CardLayout cardLayout = (CardLayout) getViewlist().getLayout();
@@ -308,13 +308,13 @@ public class DashboardView extends ParentUI implements ActionListener {
 		this.btnScheduleManagement.addActionListener(this);
 	}
 
-	public JButton getBtnDivisionManagement() {
-		return btnDivisionManagement;
+	public JButton getBtnSubjectSpeciality() {
+		return btnSubjectSpeciality;
 	}
 
-	public void createBtnDivisionManagement() {
-		this.btnDivisionManagement = new JButton("DIVISION MANAGEMENT");
-		this.btnDivisionManagement.addActionListener(this);
+	public void createBtnSubjectSpeciality() {
+		this.btnSubjectSpeciality = new JButton("SUBJECT SPECIALITY");
+		this.btnSubjectSpeciality.addActionListener(this);
 	}
 
 	public JButton getBtnSubjectManagement() {
