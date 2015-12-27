@@ -72,8 +72,46 @@ public class DashboardView extends ParentUI implements ActionListener {
 	public DashboardView(Role employee) {
 		this.employee = employee;
 		initialize();
+		checkUI();
 	}
 
+	private void checkUI(){
+		String roleType = Constant.ROLE.checkRole();
+		if(roleType.equals(Constant.QLNS)){
+			getBtnRegisterSubjectManagement().setEnabled(false);
+			getBtnScheduleManagement().setEnabled(false);
+			getBtnSpecialityManagement().setEnabled(false);
+			getBtnStudentManagement().setEnabled(false);
+			getBtnSubjectManagement().setEnabled(false);
+			getBtnSubjectOpen().setEnabled(false);
+			getBtnSubjectSpeciality().setEnabled(false);
+			getBtnTeacherManagement().setEnabled(false);
+		}else if(roleType.equals(Constant.HDKH)){
+			getBtnSpecialityManagement().setEnabled(false);
+			getBtnStudentManagement().setEnabled(false);
+			getBtnTeacherManagement().setEnabled(false);
+		}else if(roleType.equals(Constant.TBM)){
+			getBtnSpecialityManagement().setEnabled(false);
+			getBtnStudentManagement().setEnabled(false);
+			getBtnTeacherManagement().setEnabled(false);
+		}else if(roleType.equals(Constant.GVU)){
+			getBtnSubjectManagement().setEnabled(false);
+			getBtnSpecialityManagement().setEnabled(false);
+			getBtnTeacherManagement().setEnabled(false);
+			getBtnSubjectSpeciality().setEnabled(false);
+			getBtnSubjectOpen().setEnabled(false);
+		}else if(roleType.equals(Constant.GVI)){
+			getBtnSubjectManagement().setEnabled(false);
+			getBtnStudentManagement().setEnabled(false);
+			getBtnRegisterSubjectManagement().setEnabled(false);
+			getBtnSpecialityManagement().setEnabled(false);
+		}else if(roleType.equals(Constant.SV)){
+			getBtnEmployeeManagement().setEnabled(false);
+			getBtnScheduleManagement().setEnabled(false);
+			getBtnTeacherManagement().setEnabled(false);
+			getBtnSpecialityManagement().setEnabled(false);
+		}
+	}
 	private void initialize() {
 		createFrame();
 		createLbTitle();
@@ -131,14 +169,14 @@ public class DashboardView extends ParentUI implements ActionListener {
 		GridLayout flButtons = new GridLayout(9, 1, 5, 20);
 		pButtons.setLayout(flButtons);
 		pButtons.add(getBtnEmployeeManagement());
+		pButtons.add(getBtnRegisterSubjectManagement());
 		pButtons.add(getBtnSubjectManagement());
+		pButtons.add(getBtnSubjectSpeciality());
+		pButtons.add(getBtnSubjectOpen());
 		pButtons.add(getBtnSpecialityManagement());
 		pButtons.add(getBtnStudentManagement());
 		pButtons.add(getBtnScheduleManagement());
-		pButtons.add(getBtnTeacherManagement());
-		pButtons.add(getBtnSubjectSpeciality());
-		pButtons.add(getBtnSubjectOpen());
-		pButtons.add(getBtnRegisterSubjectManagement());
+		pButtons.add(getBtnTeacherManagement());		
 
 		JPanel pLeft = new JPanel(new BorderLayout());
 		pLeft.add(pInfo,BorderLayout.NORTH);

@@ -23,28 +23,23 @@ public class StudentTable implements ActionListener {
 
 	private JPopupMenu popupMenu;
 
-	private JMenuItem miDelete;
 	private JMenuItem miEdit;
-	private JMenuItem miDeleteAll;
 
 	public StudentService studentService = new StudentServiceImpl();
-	
-	public StudentTable(){
-		createMiDelete();
-		createMiDeleteAll();
+
+	public StudentTable() {
 		createMiEdit();
 		createPopupMenu();
 		createTable();
 	}
-	
+
 	public void createTableModel() {
 		String roleType = Constant.ROLE.checkRole();
-		if(!roleType.equals(Constant.QLNS) 
-				&& !roleType.equals(Constant.HDKH) 
-				&& !roleType.equals(Constant.TBM)){
+		if (!roleType.equals(Constant.QLNS) && !roleType.equals(Constant.HDKH)
+				&& !roleType.equals(Constant.TBM)) {
 			tableModel.setRowCount(0);
 			List<Student> students = studentService.find(Constant.ROLE);
-			for (Student student: students) {
+			for (Student student : students) {
 				String[] rowData = new String[9];
 				rowData[0] = student.getMaSv();
 				rowData[1] = student.getTenSv();
@@ -63,7 +58,7 @@ public class StudentTable implements ActionListener {
 		tableModel.addColumn("Code");
 		tableModel.addColumn("Name");
 		tableModel.addColumn("Sex");
-		tableModel.addColumn("DOB");		
+		tableModel.addColumn("DOB");
 		tableModel.addColumn("Address");
 		tableModel.addColumn("Phone");
 		tableModel.addColumn("Spciality");
@@ -82,12 +77,15 @@ public class StudentTable implements ActionListener {
 		this.table.getColumnModel().getColumn(6).setPreferredWidth(20);
 		this.table.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
 
-		this.table.setComponentPopupMenu(getPopupMenu());
+		String roleType = Constant.ROLE.checkRole();
+		if (!roleType.equals(Constant.TPK) && !roleType.equals(Constant.GVU)) {
+			this.table.setComponentPopupMenu(getPopupMenu());
+		}
 		this.table.addMouseListener(new TableMouseListener(this.table));
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == getMiEdit()){
+		if (e.getSource() == getMiEdit()) {
 			int row = this.table.getSelectedRow();
 			String maSv = (String) this.tableModel.getValueAt(row, 0);
 			EditStudentView editView = new EditStudentView(this, maSv);
@@ -106,17 +104,6 @@ public class StudentTable implements ActionListener {
 	public void createPopupMenu() {
 		this.popupMenu = new JPopupMenu();
 		getPopupMenu().add(getMiEdit());
-		getPopupMenu().add(getMiDelete());
-		getPopupMenu().add(getMiDeleteAll());
-	}
-
-	public JMenuItem getMiDelete() {
-		return miDelete;
-	}
-
-	public void createMiDelete() {
-		this.miDelete = new JMenuItem("Delete");
-		this.miDelete.addActionListener(this);
 	}
 
 	public JMenuItem getMiEdit() {
@@ -128,12 +115,4 @@ public class StudentTable implements ActionListener {
 		this.miEdit.addActionListener(this);
 	}
 
-	public JMenuItem getMiDeleteAll() {
-		return miDeleteAll;
-	}
-
-	public void createMiDeleteAll() {
-		this.miDeleteAll = new JMenuItem("Delete All");
-		this.miDeleteAll.addActionListener(this);
-	}
 }

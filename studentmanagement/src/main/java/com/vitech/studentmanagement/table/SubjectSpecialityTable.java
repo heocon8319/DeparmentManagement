@@ -4,8 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,27 +17,16 @@ public class SubjectSpecialityTable implements ActionListener {
 
 	private JTable table;
 
-	private JPopupMenu popupMenu;
-
-	private JMenuItem miDelete;
-	private JMenuItem miEdit;
-	private JMenuItem miDeleteAll;
-
 	public SubjectService subjectService = new SubjectServiceImpl();
 	private DefaultTableModel tableModel;
 
 	public SubjectSpecialityTable() {
-		createMiDelete();
-		createMiDeleteAll();
-		createMiEdit();
-		createPopupMenu();
 		createTable();
 	}
 
 	public void createTableModel() {
 		String roleType = Constant.ROLE.checkRole();
-		if (!roleType.equals(Constant.QLNS) 
-				&& !roleType.equals(Constant.GVU)) {
+		if (!roleType.equals(Constant.QLNS) && !roleType.equals(Constant.GVU)) {
 			tableModel.setRowCount(0);
 			List<SubjectSpeciality> subjects = subjectService
 					.getAll(Constant.ROLE);
@@ -68,7 +55,6 @@ public class SubjectSpecialityTable implements ActionListener {
 		this.table.getColumnModel().getColumn(1).setPreferredWidth(50);
 		this.table.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
 
-		this.table.setComponentPopupMenu(getPopupMenu());
 		this.table.addMouseListener(new TableMouseListener(this.table));
 	}
 
@@ -81,41 +67,4 @@ public class SubjectSpecialityTable implements ActionListener {
 		return table;
 	}
 
-	public JPopupMenu getPopupMenu() {
-		return popupMenu;
-	}
-
-	public void createPopupMenu() {
-		this.popupMenu = new JPopupMenu();
-		getPopupMenu().add(getMiEdit());
-		getPopupMenu().add(getMiDelete());
-		getPopupMenu().add(getMiDeleteAll());
-	}
-
-	public JMenuItem getMiDelete() {
-		return miDelete;
-	}
-
-	public void createMiDelete() {
-		this.miDelete = new JMenuItem("Delete");
-		this.miDelete.addActionListener(this);
-	}
-
-	public JMenuItem getMiEdit() {
-		return miEdit;
-	}
-
-	public void createMiEdit() {
-		this.miEdit = new JMenuItem("Edit");
-		this.miEdit.addActionListener(this);
-	}
-
-	public JMenuItem getMiDeleteAll() {
-		return miDeleteAll;
-	}
-
-	public void createMiDeleteAll() {
-		this.miDeleteAll = new JMenuItem("Delete All");
-		this.miDeleteAll.addActionListener(this);
-	}
 }

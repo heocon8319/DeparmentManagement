@@ -22,16 +22,12 @@ public class TeacherTable implements ActionListener {
 
 	private JPopupMenu popupMenu;
 
-	private JMenuItem miDelete;
 	private JMenuItem miEdit;
-	private JMenuItem miDeleteAll;
 
 	private DefaultTableModel tableModel;
 	public TeacherService teacherService = new TeacherServiceImpl();
 
 	public TeacherTable() {
-		createMiDelete();
-		createMiDeleteAll();
 		createMiEdit();
 		createPopupMenu();
 		createTable();
@@ -39,8 +35,7 @@ public class TeacherTable implements ActionListener {
 
 	public void createTableModel() {
 		String roleType = Constant.ROLE.checkRole();
-		if (!roleType.equals(Constant.QLNS) 
-				&& !roleType.equals(Constant.GVU)
+		if (!roleType.equals(Constant.QLNS) && !roleType.equals(Constant.GVU)
 				&& !roleType.equals(Constant.SV)) {
 			tableModel.setRowCount(0);
 			List<Teacher> teachers = teacherService.findAll(Constant.ROLE);
@@ -85,7 +80,10 @@ public class TeacherTable implements ActionListener {
 		this.table.getColumnModel().getColumn(7).setPreferredWidth(30);
 		this.table.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
 
-		this.table.setComponentPopupMenu(getPopupMenu());
+		String roleType = Constant.ROLE.checkRole();
+		if (!roleType.equals(Constant.TPK)) {
+			this.table.setComponentPopupMenu(getPopupMenu());
+		}
 		this.table.addMouseListener(new TableMouseListener(this.table));
 	}
 
@@ -108,17 +106,6 @@ public class TeacherTable implements ActionListener {
 	public void createPopupMenu() {
 		this.popupMenu = new JPopupMenu();
 		getPopupMenu().add(getMiEdit());
-		getPopupMenu().add(getMiDelete());
-		getPopupMenu().add(getMiDeleteAll());
-	}
-
-	public JMenuItem getMiDelete() {
-		return miDelete;
-	}
-
-	public void createMiDelete() {
-		this.miDelete = new JMenuItem("Delete");
-		this.miDelete.addActionListener(this);
 	}
 
 	public JMenuItem getMiEdit() {
@@ -130,12 +117,4 @@ public class TeacherTable implements ActionListener {
 		this.miEdit.addActionListener(this);
 	}
 
-	public JMenuItem getMiDeleteAll() {
-		return miDeleteAll;
-	}
-
-	public void createMiDeleteAll() {
-		this.miDeleteAll = new JMenuItem("Delete All");
-		this.miDeleteAll.addActionListener(this);
-	}
 }

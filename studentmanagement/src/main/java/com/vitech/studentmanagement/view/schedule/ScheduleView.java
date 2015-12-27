@@ -54,8 +54,19 @@ public class ScheduleView implements ActionListener{
 		createCbFilter();
 		createTxtPage();
 		createTxtSearch();
+		checkUI();
 	}
 
+	public void checkUI(){
+		String roleType = Constant.ROLE.checkRole();
+		if (roleType.equals(Constant.TPK) 
+				|| roleType.equals(Constant.HDKH)
+				|| roleType.equals(Constant.GVU)
+				|| roleType.equals(Constant.GVI)) {
+			getBtnAdd().setEnabled(false);
+		}
+	}
+	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == getBtnAdd()){
 			AddScheduleView addView = new AddScheduleView(scheduleTable);

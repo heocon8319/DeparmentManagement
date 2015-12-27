@@ -54,6 +54,17 @@ public class SubjectSpeciallyView implements ActionListener {
 		createCbFilter();
 		createTxtPage();
 		createTxtSearch();
+		checkUI();
+	}
+	
+	public void checkUI(){
+		String roleType = Constant.ROLE.checkRole();
+		if (roleType.equals(Constant.TPK) 
+				|| roleType.equals(Constant.TBM)
+				|| roleType.equals(Constant.GVI)
+				|| roleType.equals(Constant.SV)) {
+			getBtnAdd().setEnabled(false);
+		}
 	}
 
 	public void actionPerformed(ActionEvent e) {

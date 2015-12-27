@@ -255,5 +255,6 @@ public class EditStudentView implements ActionListener {
 		ImageIcon icon = new ImageIcon(getClass().getResource(
 				Constant.CLOSE_ICON));
 		this.btnCancel = new JButton("Cancle", icon);
+		this.btnCancel.addActionListener(this);
 	}
 }

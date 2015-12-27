@@ -162,6 +162,7 @@ public class TeacherView implements ActionListener {
 				.getResource(Constant.ADD_ICON));
 		this.btnAdd = new JButton("Add", icon);
 		this.btnAdd.addActionListener(this);
+		this.btnAdd.setEnabled(false);
 	}
 
 	public JButton getBtnFirst() {

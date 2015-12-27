@@ -22,16 +22,12 @@ public class ScheduleTable implements ActionListener {
 
 	private JPopupMenu popupMenu;
 
-	private JMenuItem miDelete;
 	private JMenuItem miEdit;
-	private JMenuItem miDeleteAll;
 
 	public ScheduleService scheduleService = new ScheduleServiceImpl();
 	private DefaultTableModel tableModel;
 
 	public ScheduleTable() {
-		createMiDelete();
-		createMiDeleteAll();
 		createMiEdit();
 		createPopupMenu();
 		createTable();
@@ -39,8 +35,7 @@ public class ScheduleTable implements ActionListener {
 
 	public void createTableModel() {
 		String roleType = Constant.ROLE.checkRole();
-		if (!roleType.equals(Constant.QLNS) 
-				&& !roleType.equals(Constant.SV)) {
+		if (!roleType.equals(Constant.QLNS) && !roleType.equals(Constant.SV)) {
 			tableModel.setRowCount(0);
 			List<Schedule> schedules = scheduleService.findAll(Constant.ROLE);
 			for (Schedule sc : schedules) {
@@ -71,16 +66,23 @@ public class ScheduleTable implements ActionListener {
 		this.table.getColumnModel().getColumn(2).setPreferredWidth(30);
 		this.table.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
 
-		this.table.setComponentPopupMenu(getPopupMenu());
+		String roleType = Constant.ROLE.checkRole();
+		if (!roleType.equals(Constant.TPK) 
+				&& !roleType.equals(Constant.HDKH)
+				&& !roleType.equals(Constant.TBM)
+				&& !roleType.equals(Constant.GVI)) {
+			this.table.setComponentPopupMenu(getPopupMenu());
+		}
 		this.table.addMouseListener(new TableMouseListener(this.table));
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == getMiEdit()){
+		if (e.getSource() == getMiEdit()) {
 			int row = this.table.getSelectedRow();
 			String employeeCode = (String) this.table.getValueAt(row, 1);
 			String subjectCode = (String) this.table.getValueAt(row, 0);
-			EditScheduleView editView = new EditScheduleView(this, subjectCode, employeeCode);
+			EditScheduleView editView = new EditScheduleView(this, subjectCode,
+					employeeCode);
 			editView.show();
 		}
 	}
@@ -96,17 +98,6 @@ public class ScheduleTable implements ActionListener {
 	public void createPopupMenu() {
 		this.popupMenu = new JPopupMenu();
 		getPopupMenu().add(getMiEdit());
-		getPopupMenu().add(getMiDelete());
-		getPopupMenu().add(getMiDeleteAll());
-	}
-
-	public JMenuItem getMiDelete() {
-		return miDelete;
-	}
-
-	public void createMiDelete() {
-		this.miDelete = new JMenuItem("Delete");
-		this.miDelete.addActionListener(this);
 	}
 
 	public JMenuItem getMiEdit() {
@@ -118,12 +109,4 @@ public class ScheduleTable implements ActionListener {
 		this.miEdit.addActionListener(this);
 	}
 
-	public JMenuItem getMiDeleteAll() {
-		return miDeleteAll;
-	}
-
-	public void createMiDeleteAll() {
-		this.miDeleteAll = new JMenuItem("Delete All");
-		this.miDeleteAll.addActionListener(this);
-	}
 }

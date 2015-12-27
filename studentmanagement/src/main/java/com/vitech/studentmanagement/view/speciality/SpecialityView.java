@@ -18,7 +18,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import com.vitech.studentmanagement.factory.CustomTextField;
-import com.vitech.studentmanagement.model.Subject;
 import com.vitech.studentmanagement.table.SpecialityTable;
 import com.vitech.studentmanagement.utility.Constant;
 
@@ -58,10 +57,7 @@ public class SpecialityView implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == getBtnAdd()){
-			
-		}
-
+		
 	}
 
 	public JPanel createUI() {
@@ -167,6 +163,7 @@ public class SpecialityView implements ActionListener{
 				.getResource(Constant.ADD_ICON));
 		this.btnAdd = new JButton("Add", icon);
 		this.btnAdd.addActionListener(this);
+		this.btnAdd.setEnabled(false);
 	}
 
 	public JButton getBtnFirst() {
