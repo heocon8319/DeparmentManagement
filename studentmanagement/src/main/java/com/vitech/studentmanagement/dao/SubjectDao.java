@@ -18,4 +18,6 @@ public interface SubjectDao {
 	public boolean addSubjectSpeciality(Role role, SubjectSpeciality subjectSpeciality);
 	
 	public List<SubjectOpen> getSubjectOpen(Role role);
+	
+	public boolean addSubjectOpen(Role role, SubjectOpen subjectOpen);
 }

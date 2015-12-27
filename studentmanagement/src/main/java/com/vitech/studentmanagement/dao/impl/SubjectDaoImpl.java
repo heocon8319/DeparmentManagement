@@ -132,4 +132,20 @@ public class SubjectDaoImpl implements SubjectDao {
 		return subjectOpens;
 	}
 
+	public boolean addSubjectOpen(Role role, SubjectOpen subjectOpen) {
+		boolean result = false;
+		String sql = "insert into dbasv.MONHOC_MO(MA_MH, MA_HK, NGAY_BD, NGAY_KT, SO_LUONG_SV) values ('"+subjectOpen.getMaMH()+"', '"+subjectOpen.getMaHK()+"', to_date( '"+subjectOpen.getNgayBD()+"','yyyy-MM-dd'), to_date( '"+subjectOpen.getNgayKT()+"','yyyy-MM-dd'), "+subjectOpen.getSoLuongSV()+")";
+		try {
+			Connection connection = DBProvider.connectOracelDB(role);
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			int rs = preparedStatement.executeUpdate();
+			if (rs > 0) {
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 }

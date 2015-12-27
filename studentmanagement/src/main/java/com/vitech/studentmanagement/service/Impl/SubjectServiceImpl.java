@@ -35,4 +35,8 @@ public class SubjectServiceImpl implements SubjectService {
 		return subjectDao.getSubjectOpen(role);
 	}
 
+	public boolean addSubjectOpen(Role role, SubjectOpen subjectOpen) {
+		return subjectDao.addSubjectOpen(role, subjectOpen);
+	}
+
 }

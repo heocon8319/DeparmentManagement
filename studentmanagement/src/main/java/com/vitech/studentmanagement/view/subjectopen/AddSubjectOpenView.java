@@ -6,6 +6,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
@@ -24,6 +26,7 @@ import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
 import com.vitech.studentmanagement.model.Semester;
 import com.vitech.studentmanagement.model.Subject;
+import com.vitech.studentmanagement.model.SubjectOpen;
 import com.vitech.studentmanagement.service.SemesterService;
 import com.vitech.studentmanagement.service.SubjectService;
 import com.vitech.studentmanagement.service.Impl.SemesterServiceImpl;
@@ -113,22 +116,31 @@ public class AddSubjectOpenView implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == getBtnSave()) {
-			// Subject subj = (Subject) getCbbSubject().getSelectedItem();
-			// Speciality spe = (Speciality)
-			// getCbbSpeciality().getSelectedItem();
-			// String mad = (String) getCbbMandatory().getSelectedItem();
-			//
-			// SubjectSpeciality subjectSpeciality = new SubjectSpeciality();
-			// subjectSpeciality.setMaMH(subj.getMaMH());
-			// subjectSpeciality.setMaNganh(spe.getMaNganh());
-			// subjectSpeciality.setBatBuoc(mad);
-			//
-			// boolean rs = subjectService.addSubjectSpeciality(Constant.ROLE,
-			// subjectSpeciality);
-			// if(rs){
-			// this.subjectSpecialityTable.createTableModel();
-			// this.frame.dispose();
-			// }
+			Subject subj = (Subject) getCbbSubject().getSelectedItem();
+			Semester sem = (Semester) getCbbSemester().getSelectedItem();
+			
+			SimpleDateFormat sdf = new SimpleDateFormat(Constant.PATTERN_DATE);
+			
+			Date st = (Date) getdStartDate().getModel().getValue();
+			String strStartDate = sdf.format(st);
+			
+			Date ed = (Date) getdEndDate().getModel().getValue();
+			String strEndDate = sdf.format(ed);
+			
+			String strAmount = getTxtAmout().getText();
+			
+			SubjectOpen subjectOpen = new SubjectOpen();
+			subjectOpen.setMaMH(subj.getMaMH());
+			subjectOpen.setMaHK(sem.getMaHK());
+			subjectOpen.setNgayBD(strStartDate);
+			subjectOpen.setNgayKT(strEndDate);
+			subjectOpen.setSoLuongSV(Integer.parseInt(strAmount));
+						
+			boolean rs = subjectService.addSubjectOpen(Constant.ROLE, subjectOpen);
+			if (rs) {
+				this.subjectOpenTable.createTableModel();
+				this.frame.dispose();
+			}
 		}
 		if (e.getSource() == getBtnCancel()) {
 			this.frame.dispose();
