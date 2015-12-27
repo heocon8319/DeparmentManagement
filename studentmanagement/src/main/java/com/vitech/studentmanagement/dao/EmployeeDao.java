@@ -14,4 +14,6 @@ public interface EmployeeDao {
 	public boolean update(Role role, Employee employee);
 	
 	public Employee find(Role role, String maNV);
+	
+	public boolean seftUpdate(Role role, Employee employee);
 }

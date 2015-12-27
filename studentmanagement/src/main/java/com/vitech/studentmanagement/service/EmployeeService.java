@@ -14,4 +14,6 @@ public interface EmployeeService {
 	public Employee find(Role role, String maNV);
 	
 	public boolean update(Role role, Employee employee);
+	
+	public boolean seftUpdate(Role role, Employee employee);
 }

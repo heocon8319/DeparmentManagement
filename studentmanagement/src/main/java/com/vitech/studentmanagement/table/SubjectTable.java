@@ -59,7 +59,9 @@ public class SubjectTable implements ActionListener {
 		tableModel.addColumn("Year");
 
 		String roleType = Constant.ROLE.checkRole();
-		if (!roleType.equals(Constant.QLNS) && !roleType.equals(Constant.GVU)) {
+		if (!roleType.equals(Constant.QLNS) 
+				&& !roleType.equals(Constant.GVU)
+				&& !roleType.equals(Constant.GVI)) {
 			List<Subject> subjects = subjectService.find(Constant.ROLE, 2015, 2);
 			createTableModel(subjects);
 		}

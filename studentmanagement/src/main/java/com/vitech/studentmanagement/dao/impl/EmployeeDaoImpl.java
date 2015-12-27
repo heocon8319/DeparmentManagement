@@ -137,4 +137,20 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		return employee;
 	}
 
+	public boolean seftUpdate(Role role, Employee employee) {
+		boolean result = false;
+		String sql = "update dbasv.NHAN_VIEN set TEN_NV = '"+employee.getName() + "', NAM_SINH = to_date('"+ employee.getDob() + "', 'yyyy-MM-dd') , GIOI_TINH='"+ employee.getSex() + "', DIA_CHI_LL='" + employee.getAddress()+ "', SDT='" + employee.getPhone() + "', QUE_QUAN='"+employee.getHomeTown()+"' where MA_NV = '"+ employee.getCode() + "'";
+		try {
+			Connection connection = DBProvider.connectOracelDB(role);
+			PreparedStatement preparedStatement = connection
+					.prepareStatement(sql);
+			int rs = preparedStatement.executeUpdate();
+			if (rs > 0) {
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }

@@ -27,4 +27,8 @@ public class EmployeeServiceImpl implements EmployeeService{
 	public boolean update(Role role, Employee employee) {
 		return employeeDao.update(role, employee);
 	}
+
+	public boolean seftUpdate(Role role, Employee employee) {
+		return employeeDao.seftUpdate(role, employee);
+	}
 }

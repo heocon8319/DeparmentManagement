@@ -39,7 +39,9 @@ public class StudentTable implements ActionListener {
 	
 	public void createTableModel() {
 		String roleType = Constant.ROLE.checkRole();
-		if(!roleType.equals(Constant.QLNS) && !roleType.equals(Constant.HDKH) && !roleType.equals(Constant.TBM)){
+		if(!roleType.equals(Constant.QLNS) 
+				&& !roleType.equals(Constant.HDKH) 
+				&& !roleType.equals(Constant.TBM)){
 			tableModel.setRowCount(0);
 			List<Student> students = studentService.find(Constant.ROLE);
 			for (Student student: students) {

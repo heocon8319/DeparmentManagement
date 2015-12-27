@@ -40,7 +40,8 @@ public class SpecialityTable implements ActionListener {
 		String roleType = Constant.ROLE.checkRole();
 		if (!roleType.equals(Constant.QLNS) 
 				&& !roleType.equals(Constant.TBM)
-				&& !roleType.equals(Constant.GVU)) {
+				&& !roleType.equals(Constant.GVU)
+				&& !roleType.equals(Constant.GVI)) {
 			tableModel.setRowCount(0);
 			List<Speciality> specialities = specialityService
 					.findAll(Constant.ROLE);

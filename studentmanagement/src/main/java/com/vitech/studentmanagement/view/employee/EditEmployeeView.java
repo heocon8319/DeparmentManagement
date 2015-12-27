@@ -51,7 +51,7 @@ public class EditEmployeeView implements ActionListener {
 	private JComboBox<String> cbbSex;
 
 	private JDatePickerImpl datePicker;
-	
+
 	private JLabel lbSalary;
 	private JLabel lbBonus;
 	private JLabel lbManager;
@@ -65,7 +65,7 @@ public class EditEmployeeView implements ActionListener {
 	private RoleService roleService = new RoleServiceImpl();
 
 	private String maNv;
-	
+
 	public void show() {
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -172,6 +172,26 @@ public class EditEmployeeView implements ActionListener {
 		gbc.gridx = 2;
 		frame.add(getBtnCancel(), gbc);
 
+		checkUI();
+
+	}
+
+	private void checkUI() {
+		if (Constant.ROLE.checkRole().equals(Constant.GVI)) {
+			getLbBonus().setVisible(false);
+			getTxtBonus().setVisible(false);
+
+			getLbManager().setVisible(false);
+			getCbbManager().setVisible(false);
+
+			getLbRole().setVisible(false);
+			getCbbRole().setVisible(false);
+
+			getLbSalary().setVisible(false);
+			getTxtSalary().setVisible(false);
+
+			this.frame.setSize(350, 400);
+		}
 	}
 
 	private void findById() {
@@ -194,11 +214,13 @@ public class EditEmployeeView implements ActionListener {
 			}
 		}
 
-		cbbSize = getCbbRole().getModel().getSize();
-		for (int i = 0; i < cbbSize; i++) {
-			if (cbbRole.getModel().getElementAt(i).getCode()
-					.equals(employee.getRoleCode())) {
-				cbbRole.setSelectedIndex(i);
+		if (!Constant.ROLE.checkRole().equals(Constant.GVI)) {
+			cbbSize = getCbbRole().getModel().getSize();
+			for (int i = 0; i < cbbSize; i++) {
+				if (cbbRole.getModel().getElementAt(i).getCode()
+						.equals(employee.getRoleCode())) {
+					cbbRole.setSelectedIndex(i);
+				}
 			}
 		}
 
@@ -241,17 +263,27 @@ public class EditEmployeeView implements ActionListener {
 			emp.setSex(strSex);
 			emp.setHomeTown(homeTown);
 			emp.setDob(strDob);
-			emp.setSalary(Integer.parseInt(salary));
-			emp.setBonus(Integer.parseInt(bonus));
-			emp.setManagerCode(manager.getCode());
-			emp.setRoleCode(rl.getCode());
-			
 
-			boolean rs = employeeService.update(Constant.ROLE, emp);
-			if (rs) {
-				this.employeeTable.createTableModel();
-				this.frame.dispose();
+			if (!Constant.ROLE.checkRole().equals(Constant.GVI)) {
+				emp.setSalary(Integer.parseInt(salary));
+				emp.setBonus(Integer.parseInt(bonus));
+				emp.setManagerCode(manager.getCode());
+				emp.setRoleCode(rl.getCode());
+				
+				boolean rs = employeeService.update(Constant.ROLE, emp);
+				if (rs) {
+					this.employeeTable.createTableModel();
+					this.frame.dispose();
+				}
+			}else{
+				boolean rs = employeeService.seftUpdate(Constant.ROLE, emp);
+				if (rs) {
+					this.employeeTable.createTableModel();
+					this.frame.dispose();
+				}
 			}
+
+			
 		}
 		if (e.getSource() == getBtnCancel()) {
 			this.frame.dispose();
@@ -436,26 +468,30 @@ public class EditEmployeeView implements ActionListener {
 	}
 
 	public void createCbbRole() {
-		final DefaultComboBoxModel<Role> model = new DefaultComboBoxModel<Role>();
-		List<Role> roles = roleService.findAll(Constant.ROLE);
-		for (Role rl : roles) {
-			model.addElement(rl);
-		}
-		this.cbbRole = new JComboBox<Role>(model);
-		this.cbbRole.setRenderer(new DefaultListCellRenderer() {
-			public Component getListCellRendererComponent(JList<?> list,
-					Object value, int index, boolean isSelected,
-					boolean cellHasFocus) {
-				super.getListCellRendererComponent(list, value, index,
-						isSelected, cellHasFocus);
-				if (value instanceof Role) {
-					Role r = (Role) value;
-					setText(r.getName());
-				}
-				return this;
+		if (!Constant.ROLE.checkRole().equals(Constant.GVI)) {
+			final DefaultComboBoxModel<Role> model = new DefaultComboBoxModel<Role>();
+			List<Role> roles = roleService.findAll(Constant.ROLE);
+			for (Role rl : roles) {
+				model.addElement(rl);
 			}
-		});
-		this.cbbRole.addActionListener(this);
+			this.cbbRole = new JComboBox<Role>(model);
+			this.cbbRole.setRenderer(new DefaultListCellRenderer() {
+				public Component getListCellRendererComponent(JList<?> list,
+						Object value, int index, boolean isSelected,
+						boolean cellHasFocus) {
+					super.getListCellRendererComponent(list, value, index,
+							isSelected, cellHasFocus);
+					if (value instanceof Role) {
+						Role r = (Role) value;
+						setText(r.getName());
+					}
+					return this;
+				}
+			});
+			this.cbbRole.addActionListener(this);
+		}else{
+			this.cbbRole = new JComboBox<Role>();
+		}
 	}
 
 	public JLabel getLbSalary() {
