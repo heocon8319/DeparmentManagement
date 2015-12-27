@@ -16,6 +16,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 import com.vitech.studentmanagement.model.Speciality;
 import com.vitech.studentmanagement.model.Subject;
@@ -104,6 +105,8 @@ public class AddSubjectSpecialityView implements ActionListener {
 			if(rs){
 				this.subjectSpecialityTable.createTableModel();
 				this.frame.dispose();
+			}else{
+				JOptionPane.showMessageDialog(this.frame, "Subject has opened", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		if (e.getSource() == getBtnCancel()) {

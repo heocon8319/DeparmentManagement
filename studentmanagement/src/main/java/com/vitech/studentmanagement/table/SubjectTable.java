@@ -57,9 +57,12 @@ public class SubjectTable implements ActionListener {
 		tableModel.addColumn("Training credits");
 		tableModel.addColumn("Semester");
 		tableModel.addColumn("Year");
-		
-		List<Subject> subjects = subjectService.find(Constant.ROLE, 2015, 2);
-		createTableModel(subjects);
+
+		String roleType = Constant.ROLE.checkRole();
+		if (!roleType.equals(Constant.QLNS) && !roleType.equals(Constant.GVU)) {
+			List<Subject> subjects = subjectService.find(Constant.ROLE, 2015, 2);
+			createTableModel(subjects);
+		}
 
 		this.table = new JTable(tableModel);
 		this.table.setRowHeight(30);

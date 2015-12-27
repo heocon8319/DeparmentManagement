@@ -25,32 +25,36 @@ public class TeacherTable implements ActionListener {
 	private JMenuItem miDelete;
 	private JMenuItem miEdit;
 	private JMenuItem miDeleteAll;
-	
+
 	private DefaultTableModel tableModel;
 	public TeacherService teacherService = new TeacherServiceImpl();
 
-	public TeacherTable(){
+	public TeacherTable() {
 		createMiDelete();
 		createMiDeleteAll();
 		createMiEdit();
 		createPopupMenu();
 		createTable();
 	}
-	
+
 	public void createTableModel() {
-		tableModel.setRowCount(0);
-		List<Teacher> teachers = teacherService.findAll(Constant.ROLE);
-		for (Teacher teacher: teachers) {
-			String[] rowData = new String[9];
-			rowData[0] = teacher.getMaNv();
-			rowData[1] = teacher.getTenNv();
-			rowData[2] = teacher.getNamSinh();
-			rowData[3] = teacher.getGioiTinh();
-			rowData[4] = teacher.getDiaChi();
-			rowData[5] = teacher.getSoDienThoai();
-			rowData[6] = String.valueOf(teacher.getLuong());
-			rowData[7] = String.valueOf(teacher.getPhuCap());
-			tableModel.addRow(rowData);
+		String roleType = Constant.ROLE.checkRole();
+		if (!roleType.equals(Constant.QLNS) 
+				&& !roleType.equals(Constant.GVU)) {
+			tableModel.setRowCount(0);
+			List<Teacher> teachers = teacherService.findAll(Constant.ROLE);
+			for (Teacher teacher : teachers) {
+				String[] rowData = new String[9];
+				rowData[0] = teacher.getMaNv();
+				rowData[1] = teacher.getTenNv();
+				rowData[2] = teacher.getNamSinh();
+				rowData[3] = teacher.getGioiTinh();
+				rowData[4] = teacher.getDiaChi();
+				rowData[5] = teacher.getSoDienThoai();
+				rowData[6] = String.valueOf(teacher.getLuong());
+				rowData[7] = String.valueOf(teacher.getPhuCap());
+				tableModel.addRow(rowData);
+			}
 		}
 	}
 
@@ -85,7 +89,7 @@ public class TeacherTable implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == getMiEdit()){
+		if (e.getSource() == getMiEdit()) {
 			EditTeacherView editView = new EditTeacherView(this);
 			editView.show();
 		}

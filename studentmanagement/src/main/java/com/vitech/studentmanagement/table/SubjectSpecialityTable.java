@@ -27,24 +27,29 @@ public class SubjectSpecialityTable implements ActionListener {
 
 	public SubjectService subjectService = new SubjectServiceImpl();
 	private DefaultTableModel tableModel;
-	
-	public SubjectSpecialityTable(){
+
+	public SubjectSpecialityTable() {
 		createMiDelete();
 		createMiDeleteAll();
 		createMiEdit();
 		createPopupMenu();
 		createTable();
 	}
-	
+
 	public void createTableModel() {
-		tableModel.setRowCount(0);
-		List<SubjectSpeciality> subjects = subjectService.getAll(Constant.ROLE);
-		for (SubjectSpeciality s: subjects) {
-			String[] rowData = new String[3];
-			rowData[0] = s.getMaMH();
-			rowData[1] = s.getMaNganh();
-			rowData[2] = s.getBatBuoc();
-			tableModel.addRow(rowData);
+		String roleType = Constant.ROLE.checkRole();
+		if (!roleType.equals(Constant.QLNS) 
+				&& !roleType.equals(Constant.GVU)) {
+			tableModel.setRowCount(0);
+			List<SubjectSpeciality> subjects = subjectService
+					.getAll(Constant.ROLE);
+			for (SubjectSpeciality s : subjects) {
+				String[] rowData = new String[3];
+				rowData[0] = s.getMaMH();
+				rowData[1] = s.getMaNganh();
+				rowData[2] = s.getBatBuoc();
+				tableModel.addRow(rowData);
+			}
 		}
 	}
 

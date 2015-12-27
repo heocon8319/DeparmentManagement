@@ -38,18 +38,21 @@ public class StudentTable implements ActionListener {
 	}
 	
 	public void createTableModel() {
-		tableModel.setRowCount(0);
-		List<Student> students = studentService.find(Constant.ROLE);
-		for (Student student: students) {
-			String[] rowData = new String[9];
-			rowData[0] = student.getMaSv();
-			rowData[1] = student.getTenSv();
-			rowData[2] = student.getGioiTinh();
-			rowData[3] = student.getNgaySinh().toString();
-			rowData[4] = student.getDiaChi();
-			rowData[5] = student.getSoDienThoai();
-			rowData[6] = student.getMaNganh();
-			tableModel.addRow(rowData);
+		String roleType = Constant.ROLE.checkRole();
+		if(!roleType.equals(Constant.QLNS) && !roleType.equals(Constant.HDKH) && !roleType.equals(Constant.TBM)){
+			tableModel.setRowCount(0);
+			List<Student> students = studentService.find(Constant.ROLE);
+			for (Student student: students) {
+				String[] rowData = new String[9];
+				rowData[0] = student.getMaSv();
+				rowData[1] = student.getTenSv();
+				rowData[2] = student.getGioiTinh();
+				rowData[3] = student.getNgaySinh().toString();
+				rowData[4] = student.getDiaChi();
+				rowData[5] = student.getSoDienThoai();
+				rowData[6] = student.getMaNganh();
+				tableModel.addRow(rowData);
+			}
 		}
 	}
 

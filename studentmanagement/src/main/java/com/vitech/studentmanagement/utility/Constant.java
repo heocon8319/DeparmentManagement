@@ -31,4 +31,13 @@ public class Constant {
 	public static final String PATTERN_DATE = "yyyy-MM-dd";
 	
 	public static Role ROLE = null;
+	
+	public static String DBASV = "DBASV";
+	public static String TPK = "TPK";
+	public static String QLNS = "QLNS";
+	public static String HDKH = "HDKH";
+	public static String TBM = "TBM";
+	public static String GVU = "GVU";
+	public static String GVI = "GVI";
+	public static String SV = "SV";
 }

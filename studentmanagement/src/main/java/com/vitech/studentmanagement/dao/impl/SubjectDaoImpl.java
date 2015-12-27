@@ -103,7 +103,7 @@ public class SubjectDaoImpl implements SubjectDao {
 				result = true;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return result;
 	}
@@ -143,7 +143,7 @@ public class SubjectDaoImpl implements SubjectDao {
 				result = true;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println(e.getMessage());
 		}
 		return result;
 	}

@@ -7,6 +7,7 @@ import com.vitech.studentmanagement.dao.impl.StudentDaoImpl;
 import com.vitech.studentmanagement.model.Role;
 import com.vitech.studentmanagement.model.Student;
 import com.vitech.studentmanagement.service.StudentService;
+import com.vitech.studentmanagement.utility.Constant;
 
 public class StudentServiceImpl implements StudentService{
 
@@ -22,7 +23,7 @@ public class StudentServiceImpl implements StudentService{
 
 	public boolean update(Role role, Student student) {
 		boolean result = false;
-		if(role.checkRole() == 2){
+		if(role.checkRole().equals(Constant.DBASV)){
 			result = studentDao.update(role, student);
 		}else{
 			result = studentDao.seftUpdate(role, student);

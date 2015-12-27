@@ -39,7 +39,7 @@ public class ScheduleDaoImpl implements ScheduleDao{
 
 	public boolean add(Role role, Schedule schedule) {
 		boolean result = false;
-		String sql = "  insert into dbasv.GIANG_DAY(MA_NV, MA_MH, MA_HK, VAI_TRO) values ('"+schedule.getMaNV()+"','"+schedule.getMaMH()+"','"+schedule.getMaHK()+"','"+schedule.getVaiTro()+"')"; 
+		String sql = "insert into dbasv.GIANG_DAY(MA_NV, MA_MH, MA_HK, VAI_TRO) values ('"+schedule.getMaNV()+"','"+schedule.getMaMH()+"','"+schedule.getMaHK()+"','"+schedule.getVaiTro()+"')"; 
 		try {
 			Connection connection = DBProvider.connectOracelDB(role);
 			PreparedStatement preparedStatement = connection
@@ -49,7 +49,50 @@ public class ScheduleDaoImpl implements ScheduleDao{
 				result = true;
 			}
 		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return result;
+	}
+
+	public Schedule findById(Role role, String subjectCode, String employeeCode) {
+		Schedule schedule = new Schedule();
+		String sql = "select * from dbasv.GIANG_DAY where MA_NV = ? and MA_MH = ? ";
+		try {
+			Connection connection = DBProvider.connectOracelDB(role);
+			PreparedStatement preparedStatement = connection
+					.prepareStatement(sql);
+			preparedStatement.setString(1, employeeCode);
+			preparedStatement.setString(2, subjectCode);
+			ResultSet rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				schedule.setMaMH(rs.getString("MA_MH"));
+				schedule.setMaNV(rs.getString("MA_NV"));
+				schedule.setMaHK(rs.getString("MA_HK"));
+				schedule.setVaiTro(rs.getString("VAI_TRO"));
+			}
+
+		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+		return schedule;
+	}
+
+	public boolean update(Role role, Schedule schedule) {
+		boolean result = false;
+		String sql = "update dbasv.GIANG_DAY set VAI_TRO = ? where MA_NV = ? and MA_MH = ?"; 
+		try {
+			Connection connection = DBProvider.connectOracelDB(role);
+			PreparedStatement preparedStatement = connection
+					.prepareStatement(sql);
+			preparedStatement.setString(1, schedule.getVaiTro());
+			preparedStatement.setString(2, schedule.getMaNV());
+			preparedStatement.setString(3, schedule.getMaMH());
+			int rs = preparedStatement.executeUpdate();
+			if (rs > 0) {
+				result = true;
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
 		}
 		return result;
 	}

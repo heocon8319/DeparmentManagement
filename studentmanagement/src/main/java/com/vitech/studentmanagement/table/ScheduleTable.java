@@ -14,6 +14,7 @@ import com.vitech.studentmanagement.model.Schedule;
 import com.vitech.studentmanagement.service.ScheduleService;
 import com.vitech.studentmanagement.service.Impl.ScheduleServiceImpl;
 import com.vitech.studentmanagement.utility.Constant;
+import com.vitech.studentmanagement.view.schedule.EditScheduleView;
 
 public class ScheduleTable implements ActionListener {
 
@@ -27,25 +28,28 @@ public class ScheduleTable implements ActionListener {
 
 	public ScheduleService scheduleService = new ScheduleServiceImpl();
 	private DefaultTableModel tableModel;
-	
-	public ScheduleTable(){
+
+	public ScheduleTable() {
 		createMiDelete();
 		createMiDeleteAll();
 		createMiEdit();
 		createPopupMenu();
 		createTable();
 	}
-	
+
 	public void createTableModel() {
-		tableModel.setRowCount(0);
-		List<Schedule> schedules = scheduleService.findAll(Constant.ROLE);
-		for (Schedule sc: schedules) {
-			String[] rowData = new String[4];
-			rowData[0] = sc.getMaMH();
-			rowData[1] = sc.getMaNV();
-			rowData[2] = sc.getMaHK();
-			rowData[3] = sc.getVaiTro();
-			tableModel.addRow(rowData);
+		String roleType = Constant.ROLE.checkRole();
+		if (!roleType.equals(Constant.QLNS)) {
+			tableModel.setRowCount(0);
+			List<Schedule> schedules = scheduleService.findAll(Constant.ROLE);
+			for (Schedule sc : schedules) {
+				String[] rowData = new String[4];
+				rowData[0] = sc.getMaMH();
+				rowData[1] = sc.getMaNV();
+				rowData[2] = sc.getMaHK();
+				rowData[3] = sc.getVaiTro();
+				tableModel.addRow(rowData);
+			}
 		}
 	}
 
@@ -71,8 +75,13 @@ public class ScheduleTable implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
+		if(e.getSource() == getMiEdit()){
+			int row = this.table.getSelectedRow();
+			String employeeCode = (String) this.table.getValueAt(row, 1);
+			String subjectCode = (String) this.table.getValueAt(row, 0);
+			EditScheduleView editView = new EditScheduleView(this, subjectCode, employeeCode);
+			editView.show();
+		}
 	}
 
 	public JTable getTable() {

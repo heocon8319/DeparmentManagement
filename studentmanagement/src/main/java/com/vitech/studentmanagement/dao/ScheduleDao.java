@@ -10,4 +10,8 @@ public interface ScheduleDao {
 	public List<Schedule> findAll(Role role);
 	
 	public boolean add(Role role, Schedule schedule);
+	
+	public Schedule findById(Role role, String subjectCode, String employeeCode);
+	
+	public boolean update(Role role, Schedule schedule);
 }

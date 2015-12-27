@@ -18,7 +18,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import com.vitech.studentmanagement.factory.CustomTextField;
-import com.vitech.studentmanagement.table.EmployeeTable;
 import com.vitech.studentmanagement.table.RegisterTable;
 import com.vitech.studentmanagement.utility.Constant;
 

@@ -16,6 +16,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 import com.vitech.studentmanagement.model.Employee;
 import com.vitech.studentmanagement.model.Role;
@@ -123,6 +124,8 @@ public class AddScheduleView implements ActionListener {
 			if(rs){
 				this.scheduleTable.createTableModel();
 				this.frame.dispose();
+			}else{
+				JOptionPane.showMessageDialog(this.frame, "Data is overlap", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		if (e.getSource() == getBtnCancel()) {

@@ -61,7 +61,6 @@ public class ScheduleView implements ActionListener{
 			AddScheduleView addView = new AddScheduleView(scheduleTable);
 			addView.show();
 		}
-
 	}
 
 	public JPanel createUI() {

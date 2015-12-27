@@ -25,22 +25,22 @@ public class EmployeeTable implements ActionListener {
 	private JMenuItem miDelete;
 	private JMenuItem miEdit;
 	private JMenuItem miDeleteAll;
-	
+
 	private DefaultTableModel tableModel;
 	public EmployeeService employeeService = new EmployeeServiceImpl();
-	
-	public EmployeeTable(){
+
+	public EmployeeTable() {
 		createMiDelete();
 		createMiDeleteAll();
 		createMiEdit();
 		createPopupMenu();
 		createTable();
 	}
-	
+
 	public void createTableModel() {
 		tableModel.setRowCount(0);
 		List<Employee> employees = employeeService.findAll(Constant.ROLE);
-		for (Employee employee:employees) {
+		for (Employee employee : employees) {
 			String[] rowData = new String[11];
 			rowData[0] = employee.getCode();
 			rowData[1] = employee.getName();
@@ -93,7 +93,7 @@ public class EmployeeTable implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == getMiEdit()){
+		if (e.getSource() == getMiEdit()) {
 			int row = this.table.getSelectedRow();
 			String maNv = (String) this.tableModel.getValueAt(row, 0);
 			EditEmployeeView editView = new EditEmployeeView(this, maNv);

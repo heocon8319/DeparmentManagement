@@ -65,7 +65,6 @@ public class EditEmployeeView implements ActionListener {
 	private RoleService roleService = new RoleServiceImpl();
 
 	private String maNv;
-	private int rlEdit;
 	
 	public void show() {
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -174,25 +173,6 @@ public class EditEmployeeView implements ActionListener {
 		frame.add(getBtnCancel(), gbc);
 
 	}
-	
-	private void checkRoleForEditing(){
-		rlEdit = Constant.ROLE.checkRole();
-		if(rlEdit != 4){
-			getLbSalary().setVisible(false);
-			getTxtSalary().setVisible(false);
-			
-			getLbBonus().setVisible(false);
-			getTxtBonus().setVisible(false);
-			
-			getLbManager().setVisible(false);
-			getCbbManager().setVisible(false);
-			
-			getLbRole().setVisible(false);
-			getCbbRole().setVisible(false);
-			
-			this.frame.setSize(350, 400);
-		}
-	}
 
 	private void findById() {
 		Employee employee = this.employeeTable.employeeService.find(
@@ -261,13 +241,10 @@ public class EditEmployeeView implements ActionListener {
 			emp.setSex(strSex);
 			emp.setHomeTown(homeTown);
 			emp.setDob(strDob);
-			
-			if(rlEdit == 4){
-				emp.setSalary(Integer.parseInt(salary));
-				emp.setBonus(Integer.parseInt(bonus));
-				emp.setManagerCode(manager.getCode());
-				emp.setRoleCode(rl.getCode());
-			}
+			emp.setSalary(Integer.parseInt(salary));
+			emp.setBonus(Integer.parseInt(bonus));
+			emp.setManagerCode(manager.getCode());
+			emp.setRoleCode(rl.getCode());
 			
 
 			boolean rs = employeeService.update(Constant.ROLE, emp);
@@ -288,7 +265,6 @@ public class EditEmployeeView implements ActionListener {
 		initialize();
 		this.employeeTable = employeeTable;
 		this.maNv = maNv;
-		checkRoleForEditing();
 		findById();
 	}
 

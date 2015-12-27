@@ -17,5 +17,11 @@ public class ScheduleServiceImpl implements ScheduleService{
 	public boolean add(Role role, Schedule schedule) {
 		return scheduleDao.add(role, schedule);
 	}
+	public Schedule findById(Role role, String subjectCode, String employeeCode) {
+		return scheduleDao.findById(role, subjectCode, employeeCode);
+	}
+	public boolean update(Role role, Schedule schedule) {
+		return scheduleDao.update(role, schedule);
+	}
 
 }

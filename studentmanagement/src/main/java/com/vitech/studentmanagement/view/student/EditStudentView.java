@@ -82,12 +82,11 @@ public class EditStudentView implements ActionListener {
 	}
 
 	private void findById() {
-		
-		int role  = Constant.ROLE.checkRole();
+		String roleType = Constant.ROLE.checkRole();
 		Student student = new Student();
-		if(role == 1){
+		if(roleType.equals(Constant.DBASV)){
 			student = this.studentTable.studentService.findById(Constant.ROLE, maSv);
-		}else if(role == 2){
+		}else if(roleType.equals(Constant.SV)){
 			student = this.studentTable.studentService.find(Constant.ROLE).get(0);
 		}
 		

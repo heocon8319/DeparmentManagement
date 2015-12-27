@@ -4,15 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.ImageIcon;
-import javax.swing.JCheckBox;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import com.vitech.studentmanagement.factory.ButtonEditor;
-import com.vitech.studentmanagement.factory.IconRenderer;
 import com.vitech.studentmanagement.factory.TableMouseListener;
 import com.vitech.studentmanagement.model.Speciality;
 import com.vitech.studentmanagement.service.SpecialityService;
@@ -28,27 +24,33 @@ public class SpecialityTable implements ActionListener {
 	private JMenuItem miDelete;
 	private JMenuItem miEdit;
 	private JMenuItem miDeleteAll;
-	
+
 	private DefaultTableModel tableModel;
 	public SpecialityService specialityService = new SpecialityServiceImpl();
-	
-	public SpecialityTable(){
+
+	public SpecialityTable() {
 		createMiDelete();
 		createMiDeleteAll();
 		createMiEdit();
 		createPopupMenu();
 		createTable();
 	}
-	
+
 	public void createTableModel() {
-		tableModel.setRowCount(0);
-		List<Speciality> specialities = specialityService.findAll(Constant.ROLE);
-		for (Speciality sp: specialities) {
-			String[] rowData = new String[3];
-			rowData[0] = sp.getMaNganh();
-			rowData[1] = sp.getTenNganh();
-			rowData[2] = sp.getMaNQL();
-			tableModel.addRow(rowData);
+		String roleType = Constant.ROLE.checkRole();
+		if (!roleType.equals(Constant.QLNS) 
+				&& !roleType.equals(Constant.TBM)
+				&& !roleType.equals(Constant.GVU)) {
+			tableModel.setRowCount(0);
+			List<Speciality> specialities = specialityService
+					.findAll(Constant.ROLE);
+			for (Speciality sp : specialities) {
+				String[] rowData = new String[3];
+				rowData[0] = sp.getMaNganh();
+				rowData[1] = sp.getTenNganh();
+				rowData[2] = sp.getMaNQL();
+				tableModel.addRow(rowData);
+			}
 		}
 	}
 

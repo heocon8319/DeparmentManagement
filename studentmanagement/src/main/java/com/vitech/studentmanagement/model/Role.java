@@ -1,5 +1,7 @@
 package com.vitech.studentmanagement.model;
 
+import com.vitech.studentmanagement.utility.Constant;
+
 public class Role {
 	
 	private int id;
@@ -9,26 +11,34 @@ public class Role {
 	private String code;
 	private String name;
 	
-	public int checkRole(){
-		/*
-		 * SV = 1;
-		 * DBASV = 2;
-		 * NV_TPK = 3;
-		 * NV_QLNS = 4;
-		 * TBM = 5;
-		 */
-		int roleType = 1;
+	public String checkRole(){
+		String roleType = "";
 		if(this.userName.indexOf("dbasv") >= 0 || this.userName.indexOf("DBASV") >= 0){
-			roleType = 2;
+			roleType = Constant.DBASV;
 		}
 		if(this.userName.indexOf("nv01") >= 0 || this.userName.indexOf("NV01") >= 0){
-			roleType = 3;
+			roleType = Constant.TPK;
 		}
 		if(this.userName.indexOf("nv02") >= 0 || this.userName.indexOf("NV02") >= 0){
-			roleType = 4;
+			roleType = Constant.QLNS;
+		}
+		if(this.userName.indexOf("nv03") >= 0 || this.userName.indexOf("NV03") >= 0){
+			roleType = Constant.HDKH;
 		}
 		if(this.userName.indexOf("nv04") >= 0 || this.userName.indexOf("NV04") >= 0){
-			roleType = 5;
+			roleType = Constant.TBM;
+		}
+		if(this.userName.indexOf("nv05") >= 0 || this.userName.indexOf("NV05") >= 0 
+				|| this.userName.indexOf("nv07") >=0 || this.userName.indexOf("NV07") >= 0){
+			roleType = Constant.GVU;
+		}
+		if(this.userName.indexOf("nv06") >= 0 || this.userName.indexOf("NV06") >= 0 
+				|| this.userName.indexOf("nv08") >=0 || this.userName.indexOf("NV08") >= 0){
+			roleType = Constant.GVI;
+		}
+		if(this.userName.indexOf("sv01") >= 0 || this.userName.indexOf("SV01") >= 0 
+				|| this.userName.indexOf("sv07") >=0 || this.userName.indexOf("SV07") >= 0){
+			roleType = Constant.SV;
 		}
 		return roleType;
 	}

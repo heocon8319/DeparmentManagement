@@ -4,15 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.ImageIcon;
-import javax.swing.JCheckBox;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import com.vitech.studentmanagement.factory.ButtonEditor;
-import com.vitech.studentmanagement.factory.IconRenderer;
 import com.vitech.studentmanagement.factory.TableMouseListener;
 import com.vitech.studentmanagement.model.RegisterSubject;
 import com.vitech.studentmanagement.service.RegisterSubjectService;
@@ -41,16 +37,19 @@ public class RegisterTable implements ActionListener {
 	}
 	
 	public void createTableModel() {
-		tableModel.setRowCount(0);
-		List<RegisterSubject> rlist = registerSubjectService.findAll(Constant.ROLE);
-		for (RegisterSubject r: rlist) {
-			String[] rowData = new String[5];
-			rowData[0] = r.getSubjectCode();
-			rowData[1] = r.getStudentCode();
-			rowData[2] = r.getSemester();
-			rowData[3] = r.getPeriodDate();
-			rowData[4] = String.valueOf(r.getScore());
-			tableModel.addRow(rowData);
+		String roleType = Constant.ROLE.checkRole();
+		if(!roleType.equals(Constant.QLNS)){
+			tableModel.setRowCount(0);
+			List<RegisterSubject> rlist = registerSubjectService.findAll(Constant.ROLE);
+			for (RegisterSubject r: rlist) {
+				String[] rowData = new String[5];
+				rowData[0] = r.getSubjectCode();
+				rowData[1] = r.getStudentCode();
+				rowData[2] = r.getSemester();
+				rowData[3] = r.getPeriodDate();
+				rowData[4] = String.valueOf(r.getScore());
+				tableModel.addRow(rowData);
+			}
 		}
 	}
 

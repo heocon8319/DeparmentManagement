@@ -18,6 +18,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
@@ -140,6 +141,8 @@ public class AddSubjectOpenView implements ActionListener {
 			if (rs) {
 				this.subjectOpenTable.createTableModel();
 				this.frame.dispose();
+			}else{
+				JOptionPane.showMessageDialog(this.frame, "Subject has opened", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		if (e.getSource() == getBtnCancel()) {
@@ -265,7 +268,6 @@ public class AddSubjectOpenView implements ActionListener {
 		UtilDateModel model = new UtilDateModel();
 		JDatePanelImpl datePanel = new JDatePanelImpl(model);
 		this.dStartDate = new JDatePickerImpl(datePanel);
-		;
 	}
 
 	public JDatePickerImpl getdEndDate() {
@@ -276,7 +278,6 @@ public class AddSubjectOpenView implements ActionListener {
 		UtilDateModel model = new UtilDateModel();
 		JDatePanelImpl datePanel = new JDatePanelImpl(model);
 		this.dEndDate = new JDatePickerImpl(datePanel);
-		;
 	}
 
 	public JTextField getTxtAmout() {
