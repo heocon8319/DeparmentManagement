@@ -14,5 +14,8 @@ public class ScheduleServiceImpl implements ScheduleService{
 	public List<Schedule> findAll(Role role) {
 		return scheduleDao.findAll(role);
 	}
+	public boolean add(Role role, Schedule schedule) {
+		return scheduleDao.add(role, schedule);
+	}
 
 }

@@ -37,4 +37,21 @@ public class ScheduleDaoImpl implements ScheduleDao{
 		return schedules;
 	}
 
+	public boolean add(Role role, Schedule schedule) {
+		boolean result = false;
+		String sql = "  insert into dbasv.GIANG_DAY(MA_NV, MA_MH, MA_HK, VAI_TRO) values ('"+schedule.getMaNV()+"','"+schedule.getMaMH()+"','"+schedule.getMaHK()+"','"+schedule.getVaiTro()+"')"; 
+		try {
+			Connection connection = DBProvider.connectOracelDB(role);
+			PreparedStatement preparedStatement = connection
+					.prepareStatement(sql);
+			int rs = preparedStatement.executeUpdate();
+			if (rs > 0) {
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 }

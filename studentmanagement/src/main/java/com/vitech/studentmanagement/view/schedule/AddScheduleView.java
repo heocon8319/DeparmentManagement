@@ -19,6 +19,7 @@ import javax.swing.JList;
 
 import com.vitech.studentmanagement.model.Employee;
 import com.vitech.studentmanagement.model.Role;
+import com.vitech.studentmanagement.model.Schedule;
 import com.vitech.studentmanagement.model.Semester;
 import com.vitech.studentmanagement.model.Subject;
 import com.vitech.studentmanagement.service.EmployeeService;
@@ -107,39 +108,22 @@ public class AddScheduleView implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == getBtnSave()) {
+			Employee emp = (Employee) getCbbEmployee().getSelectedItem();
+			Subject subj = (Subject) getCbbSubject().getSelectedItem();
+			Role rl = (Role) getCbbRole().getSelectedItem();
+			Semester sm = (Semester) getCbbSemester().getSelectedItem();
 			
-//			 
-//			 String strAddress = getTxtAddress().getText();
-//			 String strPhone = getTxtPhone().getText();
-//			 String strSex = (String) getCbbSex().getSelectedItem();
-//			 String salary = getTxtSalary().getText();
-//			 String bonus = getTxtBonus().getText();
-//			 String homeTown = getTxtHomeTown().getText();
-//			 Employee manager = (Employee) getCbbManager().getSelectedItem();
-//			 Role rl = (Role) getCbbRole().getSelectedItem();
-//			 
-//			 Date dob = (Date) getDatePicker().getModel().getValue();
-//			 SimpleDateFormat sdf = new SimpleDateFormat(Constant.PATTERN_DATE);
-//			 String strDob = sdf.format(dob);
-//			 
-//			 Employee emp = new Employee();
-//			 emp.setCode(strCode);
-//			 emp.setName(strName);
-//			 emp.setAddress(strAddress);
-//			 emp.setPhone(strPhone);
-//			 emp.setSex(strSex);
-//			 emp.setSalary(Integer.parseInt(salary));
-//			 emp.setBonus(Integer.parseInt(bonus));
-//			 emp.setHomeTown(homeTown);
-//			 emp.setManagerCode(manager.getCode());
-//			 emp.setRoleCode(rl.getCode());
-//			 emp.setDob(strDob);
-			 
-//			 boolean rs = employeeService.add(Constant.ROLE, emp);
-//			 if(rs){
-//				 this.employeeTable.createTableModel();
-//				 this.frame.dispose();
-//			 }
+			Schedule sch = new Schedule();
+			sch.setMaHK(sm.getMaHK());
+			sch.setMaMH(subj.getMaMH());
+			sch.setMaNV(emp.getCode());
+			sch.setVaiTro(rl.getCode());
+			
+			boolean rs = scheduleService.add(Constant.ROLE, sch);
+			if(rs){
+				this.scheduleTable.createTableModel();
+				this.frame.dispose();
+			}
 		}
 		if (e.getSource() == getBtnCancel()) {
 			this.frame.dispose();
@@ -173,8 +157,8 @@ public class AddScheduleView implements ActionListener {
 	}
 
 	public void createFrame() {
-		frame = new JFrame("Add New Employee");
-		frame.setBounds(100, 100, 350, 550);
+		frame = new JFrame("Add New Schedule");
+		frame.setBounds(100, 100, 350, 300);
 		frame.setLayout(new GridBagLayout());
 		frame.setVisible(true);
 	}
@@ -184,8 +168,7 @@ public class AddScheduleView implements ActionListener {
 	}
 
 	public void createBtnSave() {
-		ImageIcon icon = new ImageIcon(getClass().getResource(
-				Constant.SAVE_ICON));
+		ImageIcon icon = new ImageIcon(getClass().getResource(Constant.SAVE_ICON));
 		this.btnSave = new JButton("Save", icon);
 		this.btnSave.addActionListener(this);
 	}

@@ -8,4 +8,6 @@ import com.vitech.studentmanagement.model.Schedule;
 public interface ScheduleDao {
 
 	public List<Schedule> findAll(Role role);
+	
+	public boolean add(Role role, Schedule schedule);
 }
